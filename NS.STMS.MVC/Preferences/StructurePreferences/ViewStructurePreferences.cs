@@ -11,5 +11,13 @@
 			}
 		}
 
+		public static string ViewComponentsFolderPath
+		{
+			get
+			{
+				return "/Views/Shared/Components";
+			}
+		}
+
 	}
 }

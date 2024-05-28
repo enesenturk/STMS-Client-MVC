@@ -1,0 +1,75 @@
+﻿@model NS.STMS.MVC.Models.ComponentModels.LayoutComponentModels.PageHeaderModels.PageHeaderComponentModel
+
+<style>
+	.page-header {
+		height: 60px;
+		background: white;
+		border-bottom: 2px solid #e5e5e5;
+		padding: 0px;
+	}
+
+	.card-title {
+		font-size: 24px;
+		display: inline-block;
+	}
+
+	.breadcrumbs {
+		color: #737373;
+		display: inline-block;
+		list-style: none;
+		margin: 10px 0 15px 0;
+		padding: 0px;
+	}
+
+		.breadcrumbs li {
+			display: inline-block;
+			padding-left: 10px;
+			cursor: pointer;
+		}
+
+			.breadcrumbs li:not(:last-of-type):after {
+				content: '/';
+				padding-left: 10px;
+			}
+
+			.breadcrumbs li a {
+				color: inherit;
+			}
+
+	.btn-add {
+		float: right;
+		margin: 0px 0px 10px 0px;
+		font-size: 13px;
+	}
+
+	.mdi-plus-circle {
+		font-size: 12px;
+	}
+</style>
+
+<header class="page-header container-fluid">
+
+	<div class="col-xs-12 col-md-8">
+		<h1 class="card-title">@Model.Text</h1>
+
+		<ul class="breadcrumbs">
+			<li><a href="/">Anasayfa</a></li>
+			@foreach (var item in Model.Breadcrumbs)
+			{
+				<li><a href="@item.Href">@item.Text</a></li>
+			}
+		</ul>
+
+	</div>
+
+	@if (Model.AddButton != null)
+	{
+		<div class="col-xs-12 col-md-4">
+			<a type="button" class="btn btn-add btn-success" href="@Model.AddButton.Href">
+				@Model.AddButton.Text
+				<i class="mdi mdi-plus-circle"></i>
+			</a>
+		</div>
+	}
+
+</header>
