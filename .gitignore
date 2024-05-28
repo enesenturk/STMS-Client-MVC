@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/NS.STMS.CORE/obj
+/NS.STMS.CORE/bin/Debug/net7.0
+/NS.STMS.MVC/obj
+/NS.STMS.MVC/bin/Debug/net7.0
+/NS.STMS.MVC/Properties
+/NS.STMS.MVC/appsettings.json
+/NS.STMS.MVC/appsettings.Development.json
+/NS.STMS.MVC/NS.STMS.MVC.csproj.user
