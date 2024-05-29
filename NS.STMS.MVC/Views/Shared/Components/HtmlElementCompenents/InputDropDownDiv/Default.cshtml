@@ -1,23 +1,27 @@
 ﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.InputDropDownDivComponentModel
 
 <style>
-	.arrow-list-filter {
-		position: absolute;
-		top: 33px;
-		right: 20px;
+	.form-floating > .form-select {
+		padding-top: 1.2rem;
+		padding-bottom: 0rem;
+		height: 45px;
+		font-size: 14px;
+	}
+
+	.form-floating > label {
+		padding: 0.75rem .6rem;
+		font-size: 14px;
 	}
 </style>
 
 <div class="col-lg-2 col-md-6 col-sm-12">
-	<label>@Model._key</label>
-	<select id="@Model.Id"
-			style="padding: 0.1rem 0.75rem; padding-top: 0.2rem; font-size: 13px;"
-			class="custom-select"
-			onchange="@Model.OnChange"
-			autocomplete="off">
-	</select>
-	<i id="@Model.Id-icon" class="sprite sprite-arrow-down arrow-list-filter"></i>
-	<p id="@Model.ErrorId" class="inputErrorDesc"></p>
+
+	<div class="form-floating">
+		<select id="@Model.Id" class="form-select" onchange="@Model.OnChange" autocomplete="off"></select>
+		<label for="@Model.Id">@Model._key</label>
+		<p id="@Model.ErrorId" class="inputErrorDesc"></p>
+	</div>
+
 </div>
 
 <script>

@@ -2,7 +2,16 @@
 
 @await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
 
-<div class="col-12">
+<style>
+	.process-btn {
+		height: 35px;
+		font-size: 14px;
+		width: 100%;
+		margin-top: 10px;
+	}
+</style>
+
+<div class="row col-12">
 
 	@await Component.InvokeAsync("InputDropDownDiv", new
 	{
@@ -18,7 +27,13 @@
 	options = Model.Lectures
 	})
 
-	<button type="button" class="btn btn-success btn-fw" onclick="createGradeLecture()">Create</button>
+	@await Component.InvokeAsync("ProcessInputDiv", new
+	{
+	id = "CreateInput",
+	text = "Create",
+	btnClass = "btn-success",
+	onClick = "createGradeLecture()"
+	})
 
 </div>
 

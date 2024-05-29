@@ -6,16 +6,18 @@
 		top: 33px;
 		right: 20px;
 	}
+
+	.list-drop-down {
+		height: 35px;
+		padding: 0.1rem 0.75rem;
+		padding-top: 0.2rem;
+		font-size: 13px;
+	}
 </style>
 
 <div class="col-lg-2 col-md-6 col-sm-12">
 	<label>@Model._key</label>
-	<select id="@Model.Id"
-			style="padding: 0.1rem 0.75rem; padding-top: 0.2rem; font-size: 13px;"
-			class="custom-select"
-			onchange="@Model.OnChange"
-			autocomplete="off">
-	</select>
+	<select id="@Model.Id" class="custom-select list-drop-down" onchange="@Model.OnChange" autocomplete="off"></select>
 	<i id="@Model.Id-icon" class="sprite sprite-arrow-down arrow-list-filter"></i>
 	<p id="@Model.ErrorId" class="inputErrorDesc"></p>
 </div>
