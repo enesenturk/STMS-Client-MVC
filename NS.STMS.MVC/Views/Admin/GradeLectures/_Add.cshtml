@@ -3,5 +3,61 @@
 @await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
 
 <div class="col-12">
-	ADD
+
+	@await Component.InvokeAsync("InputDropDownDiv", new
+	{
+	id = "GradeInput",
+	key = "Grades",
+	options = Model.Grades
+	})
+
+	@await Component.InvokeAsync("InputDropDownDiv", new
+	{
+	id = "LectureInput",
+	key = "Lectures",
+	options = Model.Lectures
+	})
+
+	<button type="button" class="btn btn-success btn-fw" onclick="createGradeLecture()">Create</button>
+
 </div>
+
+<script>
+
+	function createGradeLecture() {
+
+		var lectureId = getInputVal('LectureInput');
+		var gradeId = getInputVal('GradeInput');
+
+		var data = {
+			LectureId: lectureId,
+			GradeId: gradeId
+		};
+
+		var url = '/Admin/GradeLectures/Add';
+		postJSonToController(url, data, createGradeLectureOnSuccess);
+
+	}
+
+	function createGradeLectureOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				console.log(resp.Message);
+				break;
+			case "S":
+
+				console.log(resp);
+
+				break;
+
+			default:
+				console.log(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+</script>

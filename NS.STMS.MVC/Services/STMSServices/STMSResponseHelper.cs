@@ -13,6 +13,9 @@ namespace NS.STMS.MVC.Services.STMSServices
 
 			if (baseResponse.Type is "S")
 			{
+				if (baseResponse.ResponseModel is null)
+					return default(T);
+
 				T responseModel = ((JToken)baseResponse.ResponseModel).ToObject<T>();
 
 				return responseModel;

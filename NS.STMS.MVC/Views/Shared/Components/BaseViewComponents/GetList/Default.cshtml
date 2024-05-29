@@ -1,0 +1,45 @@
+﻿@model NS.STMS.MVC.Models.ComponentModels.BaseViewComponentModels.GetListModels.GetListComponentModel
+
+@if (Model.HasPagination)
+{
+	<script>
+		$(document).ready(function () {
+			listFilter(1);
+		});
+	</script>
+}
+else
+{
+	<script>
+		$(document).ready(function () {
+			listFilter();
+		});
+	</script>
+}
+
+@if (Model.HasFilter)
+{
+	<script>
+		$(document).keypress(function (e) {
+
+			setDataForListFilter("ListFilterData", currentPage);
+
+			var key = e.which;
+			if (key == 13) {
+				listFilter(1);
+			}
+		});
+	</script>
+}
+else
+{
+	<script>
+		$(document).keypress(function (e) {
+
+			var key = e.which;
+			if (key == 13) {
+				listFilter(1);
+			}
+		});
+	</script>
+}

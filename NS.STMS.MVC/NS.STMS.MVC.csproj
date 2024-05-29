@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\STMSServices\GradeLectures\Queries\GetGradeLectures\Mappings\" />
-    <Folder Include="Services\STMSServices\GradeLectures\Queries\GetGradeLectures\Rules\" />
+    <Folder Include="Services\STMSServices\Admin\Languages\Commands\" />
+    <Folder Include="Services\STMSServices\Admin\Languages\Queries\GetLanguages\Rules\" />
   </ItemGroup>
 
   <ItemGroup>

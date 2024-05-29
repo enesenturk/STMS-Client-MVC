@@ -5,40 +5,81 @@
 <div class="col-12">
 
 	<div class="table-responsive">
+
 		<table class="table table-hover" id="grade-lectures">
 			<thead>
-				<tr>
-					<th></th>
-
-					@foreach (var grade in Model.GradeLecturesDto.Grades)
-					{
-						<th>@grade.Value</th>
-					}
-
+				<tr id="table-head-row">
 					@await Component.InvokeAsync("TableExcel")
 				</tr>
 			</thead>
-			<tbody>
-
-				@foreach (var lecture in Model.GradeLecturesDto.Lectures)
-				{
-					<tr>
-						<td>@lecture.Value</td>
-
-						@foreach (var grade in Model.GradeLecturesDto.Grades)
-						{
-							bool exists = Model.GradeLecturesDto.GradeLectures.FirstOrDefault(x => x.GradeId.ToString() == grade.Key && x.LectureId.ToString() == lecture.Key) != null;
-							string tickCheck = exists ? "tick-check" : "";
-
-							<td id="@grade.Key-@lecture.Key"><span class='@tickCheck'><span /></td>
-						}
-
-						<td></td>
-					</tr>
-				}
-
-			</tbody>
+			<tbody id="table-body"></tbody>
 		</table>
 	</div>
 
 </div>
+
+<script>
+
+	//#region List Filter
+
+	function listFilter() {
+
+		var url = '/Admin/GradeLectures/GetList';
+		postJSonToController(url, null, listFilterOnSuccess);
+	}
+
+	function listFilterOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+
+				console.log(resp);
+
+				var data = resp.ResponseModel;
+
+				for (let i = data.Grades.length - 1; i >= 0; i--) {
+
+					$('#table-head-row').prepend('<th>' + data.Grades[i].Value + '</th>');
+				}
+
+				$('#table-head-row').prepend('<th></th>');
+
+				for (let i = 0; i < data.Lectures.length; i++) {
+
+					$('#table-body').append('<tr>');
+					$('#table-body').append('<td>' + data.Lectures[i].Value + '</td>');
+
+					for (let j = 0; j < data.Grades.length; j++) {
+
+						var exists = data.GradeLectures.some(x =>
+							x.GradeId.toString() === data.Grades[j].Key && x.LectureId.toString() === data.Lectures[i].Key
+						);
+						var tickCheck = exists ? "tick-check" : "";
+
+						$('#table-body').append('<td id="' + data.Grades[j].Key + '-' + data.Lectures[i].Key + '"><span class=' + tickCheck + '><span /></td>');
+					}
+
+					$('#table-body').append('<td></td>');
+					$('#table-body').append('</tr>');
+
+				}
+
+				break;
+
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+	//#endregion
+
+</script>
+
+@await Component.InvokeAsync("GetList", new { hasPagination = false, hasFilter = false })

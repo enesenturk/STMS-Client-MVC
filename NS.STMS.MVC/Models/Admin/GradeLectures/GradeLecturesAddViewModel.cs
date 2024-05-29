@@ -2,5 +2,9 @@
 {
 	public class GradeLecturesAddViewModel : BaseViewModel
 	{
+
+		public List<JSonDto> Grades { get; set; }
+		public List<JSonDto> Lectures { get; set; }
+
 	}
 }

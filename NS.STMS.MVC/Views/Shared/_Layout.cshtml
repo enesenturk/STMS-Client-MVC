@@ -5,7 +5,7 @@
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<title>STMS</title>
+	<title>STMS | Student Management</title>
 	<link rel="shortcut icon" href="~/images/logos/favicon.ico">
 
 	<link rel="stylesheet" href="~/vendors/mdi/css/materialdesignicons.min.css" />
@@ -15,6 +15,10 @@
 
 	<link href="~/css/style.css" rel="stylesheet" />
 	<link href="~/css/custom-style.css" rel="stylesheet" />
+
+	<script src="~/js/jquery-3.7.1.min.js"></script>
+	<script src="~/vendors/js/vendor.bundle.base.js"></script>
+	<script src="~/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 
 </head>
 
@@ -78,8 +82,49 @@
 
 	</div>
 
-	<script src="~/vendors/js/vendor.bundle.base.js"></script>
-	<script src="~/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+	@await Component.InvokeAsync("Loading")
 
 </body>
+
+<script>
+
+	var anErrorOccurredMessage = "Error_Occurred";
+
+	function postJSonToController(url, data, successCallback) {
+
+		startLoading();
+
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: data,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: successCallback,
+			error: function (e) {
+				console.log(e);
+			}
+		});
+	}
+
+	function setDataForListFilter(filterStorageKey, currentPage) {
+		var data = getFilterParams(currentPage);
+		localStorage.setItem(filterStorageKey, JSON.stringify(data));
+	}
+
+	function setDropDownOptions(options, dropDownId) {
+
+		if (options != null) {
+			for (var i = 0; i < options.length; i++) {
+				$('#' + dropDownId).append(new Option(options[i].Value, options[i].Key));
+			}
+		}
+
+	}
+
+	function getInputVal(inputId) {
+		return $('#' + inputId).val();
+	}
+
+</script>
+
 </html>

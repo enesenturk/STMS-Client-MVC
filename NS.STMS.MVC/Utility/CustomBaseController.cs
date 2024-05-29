@@ -10,7 +10,7 @@ namespace NS.STMS.MVC.Utility
 
 		#region CTOR
 
-		private readonly IHttpContextAccessor _httpContextAccessor;
+		public readonly IHttpContextAccessor _httpContextAccessor;
 
 		private readonly AppSettings _appSettings;
 

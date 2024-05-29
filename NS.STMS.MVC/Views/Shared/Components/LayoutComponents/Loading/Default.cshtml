@@ -1,0 +1,36 @@
+﻿<style>
+	.loading-gif {
+		position: fixed;
+		display: none;
+		background-color: #808080df;
+		top: 0px;
+		left: -96px;
+		z-index: 999999999999999999;
+		width: 126%;
+		height: 100%;
+	}
+
+		.loading-gif img {
+			position: absolute;
+			left: 45%;
+			top: 40%;
+			height: 100px;
+			opacity: 1 !important;
+		}
+</style>
+
+<div class="loading-gif">
+	<img src="~/images/layout/loading.gif" />
+</div>
+
+<script>
+
+	function startLoading() {
+		$(".loading-gif").show();
+	}
+
+	function stopLoading() {
+		$(".loading-gif").hide();
+	}
+
+</script>

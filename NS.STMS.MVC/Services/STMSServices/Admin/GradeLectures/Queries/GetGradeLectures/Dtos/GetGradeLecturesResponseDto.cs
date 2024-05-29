@@ -1,7 +1,7 @@
 ﻿using NS.STMS.MVC.Models;
-using NS.STMS.MVC.Services.STMSServices.GradeLectures.Dtos;
+using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Dtos;
 
-namespace NS.STMS.MVC.Services.STMSServices.GradeLectures.Queries.GetGradeLectures.Dtos
+namespace NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Dtos
 {
     public class GetGradeLecturesResponseDto
     {
