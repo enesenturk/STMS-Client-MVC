@@ -3,11 +3,11 @@
 	public class ViewStructurePreferences
 	{
 
-		public static string AdminFolderPath
+		public static string ViewsFolderPath
 		{
 			get
 			{
-				return "/Views/Admin";
+				return "/Views";
 			}
 		}
 

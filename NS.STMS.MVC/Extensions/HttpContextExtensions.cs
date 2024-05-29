@@ -21,9 +21,16 @@ namespace NS.STMS.MVC.Extensions
 			return controllerName;
 		}
 
-		public static PageHeaderComponentModel GetPageHeader(this HttpContext context, bool includeAddButton = false)
+		public static string GetCurrentPath(this HttpContext context)
 		{
 			string path = context.Request.Path.Value;
+
+			return path;
+		}
+
+		public static PageHeaderComponentModel GetPageHeader(this HttpContext context, bool includeAddButton = false)
+		{
+			string path = context.GetCurrentPath();
 			string controllerName = context.GetCurrentControllerName();
 
 			string headerText = TextConvertionHelper.PutSpaceWhenUpperCase(controllerName);
@@ -42,11 +49,23 @@ namespace NS.STMS.MVC.Extensions
 
 		public static string GetViewsFolderPath(this HttpContext context)
 		{
-			string controllerName = context.GetCurrentControllerName();
+			string path = context.GetCurrentPath();
+			string actionName = context.GetCurrentActionName();
 
-			string viewsFolderPath = $"{ViewStructurePreferences.AdminFolderPath}/{controllerName}";
+			if (actionName is "Index")
+			{
+				string viewsFolderPath = $"{ViewStructurePreferences.ViewsFolderPath}{path}";
 
-			return viewsFolderPath;
+				return viewsFolderPath;
+			}
+			else
+			{
+				string folderPath = path.Replace($"/{actionName}", "");
+
+				string viewsFolderPath = $"{ViewStructurePreferences.ViewsFolderPath}{folderPath}";
+
+				return viewsFolderPath;
+			}
 		}
 
 		#region extracted methods 

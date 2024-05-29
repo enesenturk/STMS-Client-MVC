@@ -1,19 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc;
-using NS.STMS.MVC.Preferences.StructurePreferences;
 using NS.STMS.MVC.Models;
 using NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents;
+using NS.STMS.MVC.Extensions;
 
 namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 {
 	public class ListPageDropDownDivViewComponent : ViewComponent
 	{
-
-		#region CTOR
-
-		private string _url = $"{ViewStructurePreferences.ViewComponentsFolderPath}/HtmlElementCompenents/ListPageDropDownDiv/Default.cshtml";
-
-		#endregion
 
 		public ViewViewComponentResult Invoke(
 			List<JSonDto> options,
@@ -23,6 +17,8 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 			bool disabled = false,
 			string onChange = "setDataForListFilter('ListFilterData', currentPage);")
 		{
+			string path = GetType().GetViewComponentPath();
+
 			ListPageDropDownDivComponentModel model = new ListPageDropDownDivComponentModel
 			{
 				Id = id,
@@ -35,7 +31,7 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 				Disabled = disabled
 			};
 
-			return View(_url, model);
+			return View(path, model);
 		}
 	}
 }
