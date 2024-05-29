@@ -4,16 +4,16 @@ using NS.STMS.MVC.Models.Admin.GradeLectures;
 using NS.STMS.MVC.Models.ComponentModels.LayoutComponentModels.PageHeaderModels;
 using NS.STMS.MVC.Settings;
 using NS.STMS.MVC.Utility;
-using NS.STMS.MVC.Services.STMSServices.Admin.Languages.Queries.GetLanguages.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.Languages.Queries.GetLanguages.Dtos;
 using NS.STMS.MVC.Models.Admin.Languages;
 using NS.STMS.MVC.Extensions;
 using NS.STMS.MVC.Models;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Languages.Queries.GetLanguages.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Languages.Queries.GetLanguages.Managers;
 
 namespace NS.STMS.MVC.Controllers.Admin
 {
 
-	[Route("Admin/Languages")]
+    [Route("Admin/Languages")]
 	public class LanguagesController : CustomBaseController
 	{
 

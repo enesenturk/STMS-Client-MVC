@@ -46,16 +46,13 @@
 		switch (resp.Type) {
 
 			case "E":
-				console.log(resp.Message);
+				toastrError(resp.Message);
 				break;
 			case "S":
-
-				console.log(resp);
-
+				toastrSuccess("Success");
 				break;
-
 			default:
-				console.log(anErrorOccurredMessage);
+				toastrError(anErrorOccurredMessage);
 				break;
 		}
 	}

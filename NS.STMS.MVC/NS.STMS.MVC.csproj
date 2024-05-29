@@ -11,8 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\STMSServices\Admin\Languages\Commands\" />
-    <Folder Include="Services\STMSServices\Admin\Languages\Queries\GetLanguages\Rules\" />
+    <Folder Include="Services\ExternalServices\STMSServices\Admin\Languages\Commands\" />
+    <Folder Include="Services\ExternalServices\STMSServices\Admin\Languages\Queries\GetLanguages\Rules\" />
+    <Folder Include="Services\InternalServices\StorageServices\Abstract\" />
   </ItemGroup>
 
   <ItemGroup>

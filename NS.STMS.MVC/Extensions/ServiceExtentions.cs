@@ -1,12 +1,12 @@
-﻿using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetLectures.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.Languages.Queries.GetLanguages.Managers;
+﻿using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetLectures.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Languages.Queries.GetLanguages.Managers;
 
 namespace NS.STMS.MVC.Extensions
 {
-	public static class ServiceExtentions
+    public static class ServiceExtentions
 	{
 
 		public static void BindSTMSServices(this IServiceCollection services)

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using NS.STMS.CORE.Helpers.ConvertionHelpers;
+﻿using NS.STMS.CORE.Helpers.ConvertionHelpers;
 using NS.STMS.MVC.Models.ComponentModels.LayoutComponentModels.PageHeaderModels;
 using NS.STMS.MVC.Preferences.StructurePreferences;
-using System.IO;
 
 namespace NS.STMS.MVC.Extensions
 {

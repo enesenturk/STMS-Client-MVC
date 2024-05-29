@@ -4,22 +4,22 @@ using NS.STMS.MVC.Extensions;
 using NS.STMS.MVC.Models;
 using NS.STMS.MVC.Models.Admin.GradeLectures;
 using NS.STMS.MVC.Models.ComponentModels.LayoutComponentModels.PageHeaderModels;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Dtos;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Dtos;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Dtos;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGrades.Dtos;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetLectures.Dtos;
-using NS.STMS.MVC.Services.STMSServices.Admin.GradeLectures.Queries.GetLectures.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetLectures.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetLectures.Managers;
 using NS.STMS.MVC.Settings;
 using NS.STMS.MVC.Utility;
 
 namespace NS.STMS.MVC.Controllers.Admin
 {
 
-	[Route("Admin/GradeLectures")]
+    [Route("Admin/GradeLectures")]
 	public class GradeLecturesController : CustomBaseController
 	{
 

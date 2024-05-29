@@ -4,6 +4,9 @@ namespace NS.STMS.MVC.Controllers
 {
 	public class HomeController : Controller
 	{
+
+		#region CTOR
+
 		private readonly ILogger<HomeController> _logger;
 
 		public HomeController(ILogger<HomeController> logger)
@@ -11,12 +14,9 @@ namespace NS.STMS.MVC.Controllers
 			_logger = logger;
 		}
 
-		public IActionResult Index()
-		{
-			return View();
-		}
+		#endregion
 
-		public IActionResult Privacy()
+		public ViewResult Index()
 		{
 			return View();
 		}

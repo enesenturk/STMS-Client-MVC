@@ -1,5 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 HOME
+
+<script>
+
+	$(document).ready(function () {
+
+		var exceptionCookie = getCookie("ExceptionMessage");
+
+		if (exceptionCookie != null) {
+			toastrError(exceptionCookie);
+			deleteCookie("ExceptionMessage");
+		}
+
+	});
+
+</script>

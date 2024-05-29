@@ -1,0 +1,27 @@
+﻿
+<link rel="stylesheet" href="~/vendors/bootstrap-toastr/toastr.min.css" />
+<script src="~/vendors/bootstrap-toastr/toastr.min.js"></script>
+
+<script>
+
+	function toastrSuccess(message) {
+
+		toastr.success(message, "", { timeOut: 3000 });
+	}
+
+	function toastrError(message) {
+
+		toastr.error(message, "", { timeOut: 3000 });
+	}
+
+	function toastrWarning(message) {
+
+		toastr.warning(message, "", { timeOut: 3000 });
+	}
+
+	function toastrInfo(message) {
+
+		toastr.info(message, "", { timeOut: 3000 });
+	}
+
+</script>
