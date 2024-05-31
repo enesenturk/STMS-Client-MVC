@@ -2,6 +2,7 @@
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Dtos;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Extensions;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Helpers;
+using NS.STMS.Resources.Language.Languages;
 
 namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Managers
 {
@@ -36,7 +37,7 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.
 		public void Set(CookieModel model)
 		{
 			if (model.expire is null)
-				throw new CoreException("An error occurred. Please contact to the system admin.");
+				throw new CoreException(Messages.Error_Ocurred);
 
 			CookieOptions cookieOptions = CookieHelper.CreateCookieOptions(model.expire.Value, model.httpOnly);
 

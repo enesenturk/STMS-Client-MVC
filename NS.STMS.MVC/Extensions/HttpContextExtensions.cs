@@ -1,6 +1,8 @@
 ﻿using NS.STMS.CORE.Helpers.ConvertionHelpers;
 using NS.STMS.MVC.Models.ComponentModels.LayoutComponentModels.PageHeaderModels;
 using NS.STMS.MVC.Preferences.StructurePreferences;
+using NS.STMS.Resources.Language.Helpers;
+using NS.STMS.Resources.Language.Languages;
 
 namespace NS.STMS.MVC.Extensions
 {
@@ -39,7 +41,7 @@ namespace NS.STMS.MVC.Extensions
 
 			PageHeaderComponentModel pageHeader = new PageHeaderComponentModel
 			{
-				Text = headerText,
+				Text = LanguageHelper.GetLanguageByKey(headerText),
 				AddButton = addButton,
 				Breadcrumbs = breadcrumbs
 			};
@@ -80,7 +82,7 @@ namespace NS.STMS.MVC.Extensions
 			{
 				breadcrumbs.Add(new NavBreadcrumbItemComponentModel
 				{
-					Text = "List",
+					Text = Messages.List,
 					Href = path
 				});
 			}
@@ -88,13 +90,13 @@ namespace NS.STMS.MVC.Extensions
 			{
 				breadcrumbs.Add(new NavBreadcrumbItemComponentModel
 				{
-					Text = "List",
+					Text = Messages.List,
 					Href = path.Replace($"/{actionName}", "")
 				});
 
 				breadcrumbs.Add(new NavBreadcrumbItemComponentModel
 				{
-					Text = actionName,
+					Text = LanguageHelper.GetLanguageByKey(actionName),
 					Href = path
 				});
 			}
@@ -109,7 +111,7 @@ namespace NS.STMS.MVC.Extensions
 			{
 				addButton = new AddButtonComponentModel
 				{
-					Text = "Add",
+					Text = Messages.Add,
 					Href = $"{path}/Add"
 				};
 			}

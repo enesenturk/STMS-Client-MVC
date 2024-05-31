@@ -5,7 +5,7 @@ namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures
     public interface IGetGradeLecturesService
     {
 
-        GetGradeLecturesResponseDto Query();
+		GetGradeLecturesResponseDto Query();
 
     }
 }

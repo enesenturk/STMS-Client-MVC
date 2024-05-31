@@ -7,6 +7,7 @@ using NS.STMS.CORE.Helpers;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Managers;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Dtos;
 using NS.STMS.MVC.Preferences.CookiePreferences;
+using NS.STMS.Resources.Language.Languages;
 
 namespace NS.STMS.MVC.Filters
 {
@@ -48,10 +49,10 @@ namespace NS.STMS.MVC.Filters
 			ICookieService cookieService = (ICookieService)filterContext.HttpContext.RequestServices.GetService(typeof(ICookieService));
 			cookieService.Set(new CookieModel
 			{
-				expire = DateTimeHelper.GetNow().AddSeconds(ExceptionCookiePreferences.TimeoutSeconds),
-				httpOnly = false,
 				key = ExceptionCookiePreferences.Name,
-				value = exeptionMessage
+				value = exeptionMessage,
+				httpOnly = false,
+				expire = DateTimeHelper.GetNow().AddSeconds(ExceptionCookiePreferences.TimeoutSeconds)
 			});
 
 			filterContext.Result = new RedirectToRouteResult(
@@ -82,7 +83,7 @@ namespace NS.STMS.MVC.Filters
 
 			bool isCoreException = exceptionType == typeof(CoreException);
 
-			string exceptionMessage = isCoreException ? filterContext.Exception.Message : "An error occurred. Please contact to the system admin.";
+			string exceptionMessage = isCoreException ? filterContext.Exception.Message : Messages.Error_Ocurred;
 
 			return exceptionMessage;
 		}

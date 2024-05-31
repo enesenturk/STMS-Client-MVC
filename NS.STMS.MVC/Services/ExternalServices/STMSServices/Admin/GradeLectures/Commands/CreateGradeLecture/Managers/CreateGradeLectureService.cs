@@ -6,36 +6,37 @@ using NS.STMS.MVC.Settings;
 using System.Net;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Dtos;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Constants;
+using NS.STMS.Resources.Language.Languages;
 
 namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers
 {
-    public class CreateGradeLectureService : BaseSTMSService, ICreateGradeLectureService
-    {
+	public class CreateGradeLectureService : BaseSTMSService, ICreateGradeLectureService
+	{
 
-        #region CTOR
+		#region CTOR
 
-        public CreateGradeLectureService(IOptions<AppSettings> appSettings) : base(appSettings)
-        {
-        }
+		public CreateGradeLectureService(IOptions<AppSettings> appSettings) : base(appSettings)
+		{
+		}
 
-        #endregion
+		#endregion
 
-        public void Command(CreateGradeLectureRequestDto request)
-        {
-            string endpoint = $"{_appSettings.STMS_ApiUrl}/{GradeLecturesConstants.Post}";
+		public void Command(CreateGradeLectureRequestDto request)
+		{
+			string endpoint = $"{_appSettings.STMS_ApiUrl}/{GradeLecturesConstants.Post}";
 
-            RestfulServiceResponseDto response = RestfulServiceHelper.Post(endpoint, request);
+			RestfulServiceResponseDto response = RestfulServiceHelper.Post(endpoint, request);
 
-            if (response.StatusCode is HttpStatusCode.OK)
-            {
-                object responseModel = STMSResponseHelper.GetObjectFromResponse<object>(response.Response);
-            }
-            else
-            {
-                throw new CoreException("An error occurred. Please contact to the system admin.");
-            }
-        }
+			if (response.StatusCode is HttpStatusCode.OK)
+			{
+				object responseModel = STMSResponseHelper.GetObjectFromResponse<object>(response.Response);
+			}
+			else
+			{
+				throw new CoreException(Messages.Error_Ocurred);
+			}
+		}
 
 
-    }
+	}
 }

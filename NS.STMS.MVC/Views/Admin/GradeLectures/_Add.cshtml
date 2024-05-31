@@ -16,21 +16,21 @@
 	@await Component.InvokeAsync("InputDropDownDiv", new
 	{
 	id = "GradeInput",
-	key = "Grades",
+	key = @Messages.Grades,
 	options = Model.Grades
 	})
 
 	@await Component.InvokeAsync("InputDropDownDiv", new
 	{
 	id = "LectureInput",
-	key = "Lectures",
+	key = @Messages.Lectures,
 	options = Model.Lectures
 	})
 
 	@await Component.InvokeAsync("ProcessInputDiv", new
 	{
 	id = "CreateInput",
-	text = "Create",
+	text = @Messages.Create,
 	btnClass = "btn-success",
 	onClick = "createGradeLecture()"
 	})

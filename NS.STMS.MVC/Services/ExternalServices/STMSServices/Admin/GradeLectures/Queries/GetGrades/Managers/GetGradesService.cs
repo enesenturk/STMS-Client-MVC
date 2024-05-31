@@ -6,6 +6,7 @@ using NS.STMS.MVC.Settings;
 using System.Net;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Constants;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Dtos;
+using NS.STMS.Resources.Language.Languages;
 
 namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers
 {
@@ -34,7 +35,7 @@ namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures
             }
             else
             {
-                throw new CoreException("An error occurred. Please contact to the system admin.");
+                throw new CoreException(Messages.Error_Ocurred);
             }
         }
 

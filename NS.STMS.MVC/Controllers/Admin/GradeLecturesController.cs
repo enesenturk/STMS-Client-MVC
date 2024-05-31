@@ -9,17 +9,15 @@ using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Com
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Dtos;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Dtos;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
-using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Dtos;
-using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
-using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetLectures.Dtos;
-using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetLectures.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradesAndLectures.Dtos;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradesAndLectures.Managers;
 using NS.STMS.MVC.Settings;
 using NS.STMS.MVC.Utility;
 
 namespace NS.STMS.MVC.Controllers.Admin
 {
 
-    [Route("Admin/GradeLectures")]
+	[Route("Admin/GradeLectures")]
 	public class GradeLecturesController : CustomBaseController
 	{
 
@@ -28,8 +26,7 @@ namespace NS.STMS.MVC.Controllers.Admin
 		private readonly ICreateGradeLectureService _createGradeLectureService;
 
 		private readonly IGetGradeLecturesService _getGradeLecturesService;
-		private readonly IGetGradesService _getGradesService;
-		private readonly IGetLecturesService _getLecturesService;
+		private readonly IGetGradesAndLecturesService _getGradesAndLecturesService;
 
 		public GradeLecturesController(IHttpContextAccessor httpContextAccessor,
 			IOptions<AppSettings> appSettings,
@@ -37,14 +34,13 @@ namespace NS.STMS.MVC.Controllers.Admin
 			ICreateGradeLectureService createGradeLectureService,
 
 			IGetGradeLecturesService getGradeLecturesService,
-			IGetGradesService getGradesService,
-			IGetLecturesService getLecturesService) : base(httpContextAccessor, appSettings)
+			IGetGradesAndLecturesService getGradesAndLecturesService) : base(httpContextAccessor, appSettings)
 		{
+
 			_createGradeLectureService = createGradeLectureService;
 
 			_getGradeLecturesService = getGradeLecturesService;
-			_getGradesService = getGradesService;
-			_getLecturesService = getLecturesService;
+			_getGradesAndLecturesService = getGradesAndLecturesService;
 		}
 
 		#endregion
@@ -57,14 +53,13 @@ namespace NS.STMS.MVC.Controllers.Admin
 		{
 			PageHeaderComponentModel pageHeader = _httpContextAccessor.HttpContext.GetPageHeader();
 
-			GetGradesResponseDto gradesResponse = _getGradesService.Query();
-			GetLecturesResponseDto lecturesResponse = _getLecturesService.Query();
+			GetGradesAndLecturesResponseDto gradesAndLecturesResponse = _getGradesAndLecturesService.Query();
 
 			GradeLecturesAddViewModel model = new GradeLecturesAddViewModel
 			{
 				PageHeader = pageHeader,
-				Grades = gradesResponse.Grades,
-				Lectures = lecturesResponse.Lectures
+				Grades = gradesAndLecturesResponse.Grades,
+				Lectures = gradesAndLecturesResponse.Lectures
 			};
 
 			return View($"{_viewsFolderPath}/_Add.cshtml", model);
