@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NS.STMS.Caching\NS.STMS.Caching.csproj" />
     <ProjectReference Include="..\NS.STMS.CORE\NS.STMS.CORE.csproj" />
   </ItemGroup>
 

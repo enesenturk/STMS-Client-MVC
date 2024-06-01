@@ -1,4 +1,8 @@
-﻿using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
+﻿using NS.STMS.Caching.Cachers.Abstract;
+using NS.STMS.Caching.Cachers.Concrete.MemoryCache;
+using NS.STMS.Caching.Managers.Abstract;
+using NS.STMS.Caching.Managers.Concrete;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradesAndLectures.Managers;
@@ -11,6 +15,14 @@ namespace NS.STMS.MVC.Extensions
 {
 	public static class ServiceExtentions
 	{
+
+		public static void BindCacheServices(this IServiceCollection services)
+		{
+
+			services.AddSingleton<ICache, MemoryCacher>();
+			services.AddSingleton<ICacheService, CacheManager>();
+
+		}
 
 		public static void BindSTMSServices(this IServiceCollection services)
 		{

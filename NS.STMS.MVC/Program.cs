@@ -28,6 +28,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.AddHttpContextAccessor();
 
 // inject dependencies
+builder.Services.BindCacheServices();
 builder.Services.BindSTMSServices();
 builder.Services.BindSorageServices();
 
@@ -45,6 +46,8 @@ builder.Services.AddMvc(options =>
 		options.JsonSerializerOptions.PropertyNamingPolicy = null;
 		options.JsonSerializerOptions.DictionaryKeyPolicy = null;
 	});
+
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 
