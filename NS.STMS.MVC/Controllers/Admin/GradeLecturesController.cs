@@ -23,6 +23,7 @@ namespace NS.STMS.MVC.Controllers.Admin
 
 		#region CTOR
 
+		private readonly int _countryId = 1;
 		private readonly ICreateGradeLectureService _createGradeLectureService;
 
 		private readonly IGetGradeLecturesService _getGradeLecturesService;
@@ -53,7 +54,9 @@ namespace NS.STMS.MVC.Controllers.Admin
 		{
 			PageHeaderComponentModel pageHeader = _httpContextAccessor.HttpContext.GetPageHeader();
 
-			GetGradesAndLecturesResponseDto gradesAndLecturesResponse = _getGradesAndLecturesService.Query();
+			GetGradesAndLecturesResponseDto gradesAndLecturesResponse = _getGradesAndLecturesService.Query(_countryId);
+
+			gradesAndLecturesResponse.Lectures = gradesAndLecturesResponse.Lectures.SetLangaugeTextFromValue().OrderList();
 
 			GradeLecturesAddViewModel model = new GradeLecturesAddViewModel
 			{
@@ -102,7 +105,9 @@ namespace NS.STMS.MVC.Controllers.Admin
 		[Route("GetList")]
 		public JsonResult GetList()
 		{
-			GetGradeLecturesResponseDto gradeLecturesResponse = _getGradeLecturesService.Query();
+			GetGradeLecturesResponseDto gradeLecturesResponse = _getGradeLecturesService.Query(_countryId);
+
+			gradeLecturesResponse.Lectures = gradeLecturesResponse.Lectures.SetLangaugeTextFromValue().OrderList();
 
 			return Json(new BaseResponseModel
 			{

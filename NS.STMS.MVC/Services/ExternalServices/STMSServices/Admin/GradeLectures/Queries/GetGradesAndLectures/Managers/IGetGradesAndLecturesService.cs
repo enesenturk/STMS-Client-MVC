@@ -5,7 +5,7 @@ namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures
 	public interface IGetGradesAndLecturesService
 	{
 
-		GetGradesAndLecturesResponseDto Query();
+		GetGradesAndLecturesResponseDto Query(int countryId);
 
 	}
 }

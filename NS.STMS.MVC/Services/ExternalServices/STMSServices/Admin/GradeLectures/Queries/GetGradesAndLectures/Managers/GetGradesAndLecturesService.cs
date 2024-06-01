@@ -21,9 +21,9 @@ namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures
 
 		#endregion
 
-		public GetGradesAndLecturesResponseDto Query()
+		public GetGradesAndLecturesResponseDto Query(int countryId)
 		{
-			string endpoint = $"{_appSettings.STMS_ApiUrl}/{GradesAndLecturesConstants.Get}";
+			string endpoint = $"{_appSettings.STMS_ApiUrl}/{GradesAndLecturesConstants.Get}/{countryId}";
 
 			RestfulServiceResponseDto response = RestfulServiceHelper.Get(endpoint);
 

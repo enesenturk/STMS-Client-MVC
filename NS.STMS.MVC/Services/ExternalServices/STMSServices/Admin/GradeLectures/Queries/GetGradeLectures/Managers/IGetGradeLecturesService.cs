@@ -2,10 +2,10 @@
 
 namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers
 {
-    public interface IGetGradeLecturesService
-    {
+	public interface IGetGradeLecturesService
+	{
 
-		GetGradeLecturesResponseDto Query();
+		GetGradeLecturesResponseDto Query(int countryId);
 
-    }
+	}
 }
