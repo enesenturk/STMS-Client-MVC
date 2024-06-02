@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using NS.STMS.MVC.Extensions;
 
-namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
+namespace NS.STMS.MVC.ViewComponents.CommonFuncComponents
 {
-	public class ToastrMessageViewComponent : ViewComponent
+	public class InputOperationHelperViewComponent : ViewComponent
 	{
 
 		public ViewViewComponentResult Invoke()

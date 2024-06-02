@@ -1,0 +1,65 @@
+﻿@model NS.STMS.MVC.Models.Admin.Users.UsersViewModel
+
+@await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
+
+<div class="col-12">
+
+	<div class="table-responsive">
+
+		<table class="table table-hover">
+			<thead>
+				<tr id="table-head-row">
+					<th>@Messages.Name</th>
+					<th>@Messages.Surname</th>
+					<th>@Messages.Email</th>
+					@await Component.InvokeAsync("TableExcel")
+				</tr>
+			</thead>
+			<tbody id="table-body"></tbody>
+		</table>
+	</div>
+
+</div>
+
+<script>
+
+	//#region List Filter
+
+	function listFilter(currentPage) {
+
+		var url = '/Admin/Users/GetList';
+		postJSonToController(url, null, listFilterOnSuccess);
+	}
+
+	function listFilterOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+
+				var records = resp.ResponseModel.Users;
+				console.log(records);
+
+				for (let i = 0; i < records.length; i++) {
+
+					$('#table-body').append('<tr>' + '<td>' + records[i].Name + '</td>' + '<td>' + records[i].Surname + '</td>' + '<td>' + records[i].Email + '</td>' + '<td></td>' + '</tr>');
+				}
+
+				break;
+
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+		//#endregion
+
+</script>
+
+@await Component.InvokeAsync("GetListDocReady", new { hasPagination = true, hasFilter = false })

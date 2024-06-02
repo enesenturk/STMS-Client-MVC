@@ -3,6 +3,8 @@ using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Que
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradesAndLectures.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetLectures.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetAddUserOptions.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetUsers.Managers;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Abstract;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Managers;
@@ -24,6 +26,13 @@ namespace NS.STMS.MVC.Extensions
 			services.AddSingleton<IGetGradesAndLecturesService, GetGradesAndLecturesService>();
 			services.AddSingleton<IGetGradesService, GetGradesService>();
 			services.AddSingleton<IGetLecturesService, GetLecturesService>();
+
+			#endregion
+
+			#region Users
+
+			services.AddSingleton<IGetAddUserOptionsService, GetAddUserOptionsService>();
+			services.AddSingleton<IGetUsersService, GetUsersService>();
 
 			#endregion
 

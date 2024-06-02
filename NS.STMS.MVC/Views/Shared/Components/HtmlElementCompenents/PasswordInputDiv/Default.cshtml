@@ -1,0 +1,80 @@
+﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.PasswordInputDivComponentModel
+
+<style>
+	.form-floating > .form-control {
+		padding-top: 1.2rem;
+		padding-bottom: 0rem;
+		height: 45px;
+		font-size: 14px;
+	}
+
+	.form-floating > .floating-input-lbl {
+		padding: 0.75rem .6rem;
+		font-size: 14px;
+		color: #A5A9AD;
+	}
+
+	.password-toggle-icon {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+		cursor: pointer;
+	}
+</style>
+
+<div class="col-lg-2 col-md-6 col-sm-12">
+
+	<div class="form-floating">
+		<input id="PasswordInput" type="password" class="form-control password-inputs" maxlength="20" autocomplete="off">
+		<label class="floating-input-lbl" for="PasswordInput">@Messages.Password</label>
+		<p id="PasswordInputError" class="inputErrorDesc"></p>
+		<span class="password-toggle-icon" onclick="togglePasswordVisibility()">
+			<i class="mdi mdi-eye"></i>
+		</span>
+	</div>
+
+</div>
+
+@if (Model.ReenterPassword)
+{
+
+	<div class="col-lg-2 col-md-6 col-sm-12">
+
+		<div class="form-floating">
+			<input id="ReenterPasswordInput" type="password" class="form-control password-inputs" maxlength="20" autocomplete="off">
+			<label class="floating-input-lbl" for="ReenterPasswordInput">Reenter</label>
+		</div>
+
+	</div>
+
+}
+
+<script>
+
+	function togglePasswordVisibility() {
+
+		var icon = document.querySelector('.password-toggle-icon i');
+		var passwordInputs = $('.password-inputs');
+
+		passwordInputs.each(function (index, element) {
+
+			var passwordInput = $(element).get(0);
+
+			if (passwordInput.type === 'password') {
+
+				passwordInput.type = 'text';
+				icon.classList.remove('mdi-eye');
+				icon.classList.add('mdi-eye-off');
+			}
+			else {
+
+				passwordInput.type = 'password';
+				icon.classList.remove('mdi-eye-off');
+				icon.classList.add('mdi-eye');
+			}
+		});
+
+	}
+
+</script>

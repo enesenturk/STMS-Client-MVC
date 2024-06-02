@@ -1,6 +1,6 @@
 ﻿namespace NS.STMS.MVC.Models.Admin.GradeLectures
 {
-	public class GradeLecturesAddViewModel : BaseViewModel
+	public class AddGradeLecturesViewModel : BaseViewModel
 	{
 
 		public List<JSonDto> Grades { get; set; }

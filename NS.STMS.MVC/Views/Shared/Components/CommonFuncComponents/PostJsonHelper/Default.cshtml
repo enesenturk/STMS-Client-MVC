@@ -1,0 +1,36 @@
+﻿<script>
+
+	function postJSonToController(url, data, successCallback) {
+
+		startLoading();
+
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: data,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: successCallback,
+			error: function (e) {
+				console.log(e);
+				toastrError(anErrorOccurredMessage);
+			}
+		});
+	}
+
+	function getJSonFromController(url, data, successCallback) {
+
+		StartLoading();
+
+		$.ajax({
+			type: "GET",
+			url: url,
+			data: data,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: successCallback,
+			error: function (e) {
+				ajaxPostError(e);
+			}
+		});
+
+	}
+</script>

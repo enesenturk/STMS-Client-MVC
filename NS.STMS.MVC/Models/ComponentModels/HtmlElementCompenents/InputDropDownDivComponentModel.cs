@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Html;
-
-namespace NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents
+﻿namespace NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents
 {
 	public class InputDropDownDivComponentModel
 	{

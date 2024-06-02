@@ -12,7 +12,7 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 		public ViewViewComponentResult Invoke(
 			List<JSonDto> options,
 			string key,
-			object value,
+			string value,
 			string id,
 			string onChange,
 			bool disabled = false
@@ -25,7 +25,7 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 				Id = id,
 
 				_key = key,
-				_value = value == null ? null : value.ToString(),
+				_value = value,
 
 				Options = options,
 				OnChange = onChange,

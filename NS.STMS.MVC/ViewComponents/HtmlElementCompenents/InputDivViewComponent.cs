@@ -1,33 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc;
-using NS.STMS.MVC.Models;
 using NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents;
 using NS.STMS.MVC.Extensions;
 
 namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 {
-	public class ListPageDropDownDivViewComponent : ViewComponent
+	public class InputDivViewComponent : ViewComponent
 	{
 
 		public ViewViewComponentResult Invoke(
-			List<JSonDto> options,
 			string key,
 			object value,
 			string id,
-			bool disabled = false,
-			string onChange = "setDataForListFilter('ListFilterData', currentPage);")
+			int maxLength,
+			string onChange,
+			string type = "text",
+			bool disabled = false
+			)
 		{
 			string path = GetType().GetViewComponentPath();
 
-			ListPageDropDownDivComponentModel model = new ListPageDropDownDivComponentModel
+			InputDivComponentModel model = new InputDivComponentModel
 			{
 				Id = id,
+				Type = type,
+				MaxLength = maxLength,
 
 				_key = key,
 				_value = value == null ? null : value.ToString(),
 
-				Options = options,
 				OnChange = onChange,
+
 				Disabled = disabled
 			};
 

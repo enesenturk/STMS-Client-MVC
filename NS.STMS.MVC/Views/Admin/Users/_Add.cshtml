@@ -1,0 +1,181 @@
+﻿@model NS.STMS.MVC.Models.Admin.Users.AddUsersViewModel
+
+@await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
+
+<div class="row col-12">
+
+	<style>
+		.section-title {
+			color: #343a40;
+			text-transform: capitalize;
+			font-family: sans-serif;
+			font-size: 16px;
+		}
+
+		.section-div {
+			margin-top: 20px;
+		}
+	</style>
+
+	<div class="row col-12 section-div">
+
+		<div class="col-12">
+			<h1 class="section-title">@Messages.Personal_Information</h1>
+			<hr />
+		</div>
+
+		@await Component.InvokeAsync("InputDiv", new
+		{
+		id = "NameInput",
+		key = @Messages.Name,
+		maxLength = 100
+		})
+
+		@await Component.InvokeAsync("InputDiv", new
+		{
+		id = "SurnameInput",
+		key = @Messages.Surname,
+		maxLength = 100
+		})
+
+		@await Component.InvokeAsync("InputDiv", new
+		{
+		id = "EmailInput",
+		key = @Messages.Email,
+		maxLength = 100
+		})
+
+		@await Component.InvokeAsync("PasswordInputDiv", new
+		{
+		reenter = false
+		})
+
+	</div>
+
+	<div class="row col-12 section-div">
+
+		<div class="col-12">
+			<h1 class="section-title">@Messages.Eduction_Information</h1>
+			<hr />
+		</div>
+
+		@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "GradeInput",
+		key = @Messages.Grade,
+		options = Model.Grades
+		})
+
+		@await Component.InvokeAsync("InputDiv", new
+		{
+		id = "SchoolInput",
+		key = @Messages.School,
+		maxLength = 100
+		})
+
+	</div>
+
+	<div class="row col-12 section-div">
+
+		<div class="col-12">
+			<h1 class="section-title">@Messages.Address_Information</h1>
+			<hr />
+		</div>
+
+		@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "CountryInput",
+		key = @Messages.Country,
+		options = Model.Countries,
+		onChange = "countrySelected()"
+		})
+
+		@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "CityInput",
+		key = @Messages.City,
+		disabled = true
+		})
+
+		@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "CountyInput",
+		key = @Messages.County,
+		disabled = true
+		})
+
+	</div>
+
+	@await Component.InvokeAsync("ProcessInputDiv", new
+	{
+	id = "CreateInput",
+	text = @Messages.Create,
+	btnClass = "btn-success",
+	onClick = "createGradeLecture()"
+	})
+
+</div>
+
+<script>
+
+	function createUser() {
+
+		var gradeId = getInputVal('GradeInput');
+
+		var data = {
+			GradeId: gradeId
+		};
+
+		var url = '/Admin/Users/Add';
+		postJSonToController(url, data, createUserOnSuccess);
+
+	}
+
+	function createUserOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+				toastrSuccess();
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+	function countrySelected() {
+
+		var country = getInputVal('CountryInput');
+
+		var url = `/Common/Address/GetCities/${country}`;
+		getJSonFromController(url, null, countrySelectedOnSuccess);
+
+	}
+
+	function countrySelectedOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+
+				// cevapta gelen şehirleri listele ve bunu bir component'e çıkart
+
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+</script>

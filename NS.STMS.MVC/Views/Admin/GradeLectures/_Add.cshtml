@@ -1,15 +1,6 @@
-﻿@model NS.STMS.MVC.Models.Admin.GradeLectures.GradeLecturesAddViewModel
+﻿@model NS.STMS.MVC.Models.Admin.GradeLectures.AddGradeLecturesViewModel
 
 @await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
-
-<style>
-	.process-btn {
-		height: 35px;
-		font-size: 14px;
-		width: 100%;
-		margin-top: 10px;
-	}
-</style>
 
 <div class="row col-12">
 
@@ -64,7 +55,7 @@
 				toastrError(resp.Message);
 				break;
 			case "S":
-				toastrSuccess("Success");
+				toastrSuccess();
 				break;
 			default:
 				toastrError(anErrorOccurredMessage);

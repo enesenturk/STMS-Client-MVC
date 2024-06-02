@@ -1,0 +1,13 @@
+﻿<script>
+
+	function setDropDownOptions(options, dropDownId) {
+
+		if (options != null) {
+			for (var i = 0; i < options.length; i++) {
+				$('#' + dropDownId).append(new Option(options[i].Value, options[i].Key));
+			}
+		}
+
+	}
+
+</script>

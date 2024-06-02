@@ -1,5 +1,14 @@
 ﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.ProcessInputDivViewModel
 
+<style>
+	.process-btn {
+		height: 35px;
+		font-size: 14px;
+		width: 100%;
+		margin-top: 10px;
+	}
+</style>
+
 <div class="col-lg-2 col-md-6 col-sm-12">
 	<button id="@Model.Id" type="button" class="btn @Model.BtnClass process-btn" onclick="@Model.OnClick">@Model.Text</button>
 </div>

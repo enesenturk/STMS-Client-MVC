@@ -1,5 +1,5 @@
 ﻿using NS.STMS.MVC.Models;
-using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Dtos;
+using NS.STMS.MVC.Models.Admin.GradeLectures;
 
 namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Dtos
 {
@@ -8,6 +8,6 @@ namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures
         public List<JSonDto> Lectures { get; set; }
         public List<JSonDto> Grades { get; set; }
 
-        public List<GradeLectureDto> GradeLectures { get; set; } = new List<GradeLectureDto>();
+        public List<GradeLectureModel> GradeLectures { get; set; } = new List<GradeLectureModel>();
     }
 }

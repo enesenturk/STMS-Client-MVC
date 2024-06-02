@@ -2,6 +2,11 @@ html, body, .container-scroller {
     height: 100%;
 }
 
+hr {
+    margin-top: .7rem;
+    margin-bottom: .7rem;
+}
+
 .logo-mini {
     width: 35px;
 }

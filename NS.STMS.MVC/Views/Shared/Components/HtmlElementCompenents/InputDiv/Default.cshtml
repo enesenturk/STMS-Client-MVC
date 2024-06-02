@@ -1,25 +1,26 @@
-﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.InputDropDownDivComponentModel
+﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.InputDivComponentModel
 
 <style>
-	.form-floating > .form-select {
+	.form-floating > .form-control {
 		padding-top: 1.2rem;
 		padding-bottom: 0rem;
 		height: 45px;
 		font-size: 14px;
 	}
 
-	.form-floating > .floating-select-lbl {
+	.form-floating > .floating-input-lbl {
 		padding: 0.75rem .6rem;
 		font-size: 14px;
 		color: #A5A9AD;
 	}
+
 </style>
 
 <div class="col-lg-2 col-md-6 col-sm-12">
 
 	<div class="form-floating">
-		<select id="@Model.Id" class="form-select" onchange="@Model.OnChange" autocomplete="off"></select>
-		<label class="floating-select-lbl" for="@Model.Id">@Model._key</label>
+		<input id="@Model.Id" type="@Model.Type" class="form-control" maxlength="@Model.MaxLength" autocomplete="off">
+		<label class="floating-input-lbl" for="@Model.Id">@Model._key</label>
 		<p id="@Model.ErrorId" class="inputErrorDesc"></p>
 	</div>
 
@@ -30,17 +31,9 @@
 	//document ready
 	$(function () {
 
-		var options = @Html.Raw(Json.Serialize(Model.Options));
-
 		var inputId = "@Model.Id";
 		var value = "@Model._value";
 		var disabled = "@Model.Disabled";
-
-		setDropDownOptions(options, inputId);
-
-		if (value === "" || value === 0 || value === "0" || value == null) {
-			value = "null";
-		}
 
 		setInputVal(inputId, value);
 

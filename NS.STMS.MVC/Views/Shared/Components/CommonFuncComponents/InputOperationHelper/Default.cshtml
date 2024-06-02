@@ -1,0 +1,19 @@
+﻿<script>
+
+	function getInputVal(inputId) {
+		return $('#' + inputId).val();
+	}
+
+	function setInputVal(inputId, value) {
+		$('#' + inputId).val(value);
+	}
+
+	function setInputDisabled(inputId) {
+		$('#' + inputId).prop("disabled", true);
+	}
+
+	function setInputEnabled(inputId) {
+		$('#' + inputId).prop("disabled", false);
+	}
+
+</script>
