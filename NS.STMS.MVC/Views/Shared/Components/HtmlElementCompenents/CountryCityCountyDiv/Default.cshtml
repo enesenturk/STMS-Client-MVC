@@ -1,0 +1,88 @@
+﻿@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "CountryInput",
+		key = @Messages.Country,
+		options = Model.Countries,
+		onChange = "countrySelected()"
+		})
+
+@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "CityInput",
+		key = @Messages.City,
+		disabled = true,
+		onChange = "citySelected()"
+		})
+
+@await Component.InvokeAsync("InputDropDownDiv", new
+		{
+		id = "CountyInput",
+		key = @Messages.County,
+		disabled = true
+		})
+
+
+<script>
+
+	function countrySelected() {
+
+		var country = getInputVal('CountryInput');
+
+		var url = `/Common/Address/GetCities/${country}`;
+		getJSonFromController(url, null, countrySelectedOnSuccess);
+
+	}
+
+	function countrySelectedOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+
+				setDropDownOptions(resp.ResponseModel.Cities, 'CityInput');
+				setInputEnabled('CityInput');
+				citySelected();
+
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+	function citySelected() {
+
+		var city = getInputVal('CityInput');
+
+		var url = `/Common/Address/GetCounties/${city}`;
+		getJSonFromController(url, null, citySelectedOnSuccess);
+
+	}
+
+	function citySelectedOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+
+				setDropDownOptions(resp.ResponseModel.Counties, 'CountyInput');
+				setInputEnabled('CountyInput');
+
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+</script>

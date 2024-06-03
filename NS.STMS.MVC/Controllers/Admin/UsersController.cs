@@ -10,6 +10,11 @@ using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.Get
 using NS.STMS.MVC.Models.Admin.Users;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetAddUserOptions.Dtos;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetAddUserOptions.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Commands.CreateUser.Dtos;
+using AutoMapper;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Commands.CreateUser.Managers;
+using NS.STMS.Resources.Security.Encryption;
+using System.Security.Cryptography;
 
 namespace NS.STMS.MVC.Controllers.Admin
 {
@@ -19,15 +24,19 @@ namespace NS.STMS.MVC.Controllers.Admin
 
 		#region CTOR
 
+		private readonly ICreateUserService _createUserService;
+
 		private readonly IGetAddUserOptionsService _getAddUserOptionsService;
 		private readonly IGetUsersService _getUsersService;
 
 		public UsersController(
+			ICreateUserService createUserService,
 			IGetAddUserOptionsService getAddUserOptionsService,
 			IGetUsersService getUsersService,
 
-			IHttpContextAccessor httpContextAccessor, IOptions<AppSettings> appSettings) : base(httpContextAccessor, appSettings)
+			IHttpContextAccessor httpContextAccessor, IMapper mapper, IOptions<AppSettings> appSettings) : base(httpContextAccessor, mapper, appSettings)
 		{
+			_createUserService = createUserService;
 			_getAddUserOptionsService = getAddUserOptionsService;
 			_getUsersService = getUsersService;
 		}
@@ -43,10 +52,13 @@ namespace NS.STMS.MVC.Controllers.Admin
 			PageHeaderComponentModel pageHeader = _httpContextAccessor.HttpContext.GetPageHeader();
 
 			GetAddUserOptionsResponseDto response = _getAddUserOptionsService.Query();
+			response.Countries.AddSelectOption();
 			response.Countries = response.Countries.SetLangaugeTextFromValue().OrderList();
+
+			response.Grades.AddSelectOption();
 			response.Grades = response.Grades.SetLangaugeTextFromValue().OrderList();
 
-			AddUsersViewModel model = new AddUsersViewModel
+			AddUserViewModel model = new AddUserViewModel
 			{
 				PageHeader = pageHeader,
 				Countries = response.Countries,
@@ -56,23 +68,21 @@ namespace NS.STMS.MVC.Controllers.Admin
 			return View($"{_viewsFolderPath}/_Add.cshtml", model);
 		}
 
-		//[Route("Add")]
-		//[HttpPost]
-		//public JsonResult Add(GradeLectureModel request)
-		//{
-		//	CreateGradeLectureRequestDto model = new CreateGradeLectureRequestDto
-		//	{
-		//		GradeId = request.GradeId,
-		//		LectureId = request.LectureId
-		//	};
+		[Route("Add")]
+		[HttpPost]
+		public JsonResult Add(AddUserModel model)
+		{
+			CreateUserRequestDto request = _mapper.Map<CreateUserRequestDto>(model);
 
-		//	_createGradeLectureService.Command(model);
+			request.Password = EncryptionHelper.Encrypt(request.Password, _appSettings.EncryptionKey);
 
-		//	return Json(new BaseResponseModel
-		//	{
-		//		ResponseModel = request
-		//	});
-		//}
+			_createUserService.Command(request);
+
+			return Json(new BaseResponseModel
+			{
+				ResponseModel = request
+			});
+		}
 
 		#endregion
 

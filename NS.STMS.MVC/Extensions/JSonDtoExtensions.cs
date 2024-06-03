@@ -1,10 +1,20 @@
 ﻿using NS.STMS.MVC.Models;
 using NS.STMS.Resources.Language.Helpers;
+using NS.STMS.Resources.Language.Languages;
 
 namespace NS.STMS.MVC.Extensions
 {
 	public static class JSonDtoExtensions
 	{
+
+		public static void AddSelectOption(this List<JSonDto> records)
+		{
+			records.Insert(0, new JSonDto
+			{
+				Key = "null",
+				Value = Messages.Please_Select
+			});
+		}
 
 		public static List<JSonDto> SetLangaugeTextFromValue(this List<JSonDto> records)
 		{

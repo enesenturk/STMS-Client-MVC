@@ -6,22 +6,22 @@
 
 	function toastrSuccess(message) {
 
-		toastr.success(message, "@Messages.Successful", { timeOut: 3000 });
+		toastr.success(message, "@TextHelper.ToHtml(Messages.Successful)", { timeOut: 3000 });
 	}
 
 	function toastrError(message) {
 
-		toastr.error(message, "@Messages.Error", { timeOut: 3000 });
+		toastr.error(message, "@TextHelper.ToHtml(Messages.Error)", { timeOut: 3000 });
 	}
 
 	function toastrWarning(message) {
 
-		toastr.warning(message, "@Messages.Warning", { timeOut: 3000 });
+		toastr.warning(message, "@TextHelper.ToHtml(Messages.Warning)", { timeOut: 3000 });
 	}
 
 	function toastrInfo(message) {
 
-		toastr.info(message, "@Messages.Info", { timeOut: 3000 });
+		toastr.info(message, "@TextHelper.ToHtml(Messages.Info)", { timeOut: 3000 });
 	}
 
 </script>

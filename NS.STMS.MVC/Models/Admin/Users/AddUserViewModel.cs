@@ -1,6 +1,6 @@
 ﻿namespace NS.STMS.MVC.Models.Admin.Users
 {
-	public class AddUsersViewModel : BaseViewModel
+	public class AddUserViewModel : BaseViewModel
 	{
 
 		public List<JSonDto> Countries { get; set; }

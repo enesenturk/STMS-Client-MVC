@@ -4,6 +4,7 @@
 	{
 
 		public static string Get { get { return "api/Users"; } }
+		public static string Post { get { return "api/Users"; } }
 
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NS.STMS.MVC.Extensions;
 using NS.STMS.MVC.Models;
@@ -32,7 +33,7 @@ namespace NS.STMS.MVC.Controllers.Admin
 			IGetGradeLecturesService getGradeLecturesService,
 			IGetGradesAndLecturesService getGradesAndLecturesService,
 
-			IHttpContextAccessor httpContextAccessor, IOptions<AppSettings> appSettings) : base(httpContextAccessor, appSettings)
+			IHttpContextAccessor httpContextAccessor, IMapper mapper, IOptions<AppSettings> appSettings) : base(httpContextAccessor, mapper, appSettings)
 		{
 
 			_createGradeLectureService = createGradeLectureService;

@@ -37,6 +37,5 @@ namespace NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures
 			}
 		}
 
-
 	}
 }

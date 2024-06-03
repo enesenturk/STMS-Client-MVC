@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using NS.STMS.MVC.Extensions;
 using NS.STMS.MVC.Models;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Common.Addresses.Queries.GetCities.Dtos;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Common.Addresses.Queries.GetCities.Managers;
@@ -23,7 +25,7 @@ namespace NS.STMS.MVC.Controllers.Common
 			IGetCitiesService getCitiesService,
 			IGetCountiesService getCountiesService,
 
-			IHttpContextAccessor httpContextAccessor, IOptions<AppSettings> appSettings) : base(httpContextAccessor, appSettings)
+			IHttpContextAccessor httpContextAccessor, IMapper mapper, IOptions<AppSettings> appSettings) : base(httpContextAccessor, mapper, appSettings)
 		{
 			_getCitiesService = getCitiesService;
 			_getCountiesService = getCountiesService;
@@ -36,6 +38,7 @@ namespace NS.STMS.MVC.Controllers.Common
 		public JsonResult GetCities(int countryId)
 		{
 			GetCitiesResponseModel response = _getCitiesService.Query(countryId);
+			response.Cities.AddSelectOption();
 
 			return Json(new BaseResponseModel
 			{
@@ -48,6 +51,7 @@ namespace NS.STMS.MVC.Controllers.Common
 		public JsonResult GetCounties(int cityId)
 		{
 			GetCountiesResponseModel response = _getCountiesService.Query(cityId);
+			response.Counties.AddSelectOption();
 
 			return Json(new BaseResponseModel
 			{

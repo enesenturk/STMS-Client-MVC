@@ -1,4 +1,4 @@
-﻿@model NS.STMS.MVC.Models.Admin.Users.AddUsersViewModel
+﻿@model NS.STMS.MVC.Models.Admin.Users.AddUserViewModel
 
 @await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
 
@@ -45,9 +45,16 @@
 		maxLength = 100
 		})
 
+		@await Component.InvokeAsync("InputDiv", new
+		{
+		id = "DateOfBirthInput",
+		key = @Messages.Date_of_Birth,
+		maxLength = 100
+		})
+
 		@await Component.InvokeAsync("PasswordInputDiv", new
 		{
-		reenter = false
+		reenter = true
 		})
 
 	</div>
@@ -82,27 +89,7 @@
 			<hr />
 		</div>
 
-		@await Component.InvokeAsync("InputDropDownDiv", new
-		{
-		id = "CountryInput",
-		key = @Messages.Country,
-		options = Model.Countries,
-		onChange = "countrySelected()"
-		})
-
-		@await Component.InvokeAsync("InputDropDownDiv", new
-		{
-		id = "CityInput",
-		key = @Messages.City,
-		disabled = true
-		})
-
-		@await Component.InvokeAsync("InputDropDownDiv", new
-		{
-		id = "CountyInput",
-		key = @Messages.County,
-		disabled = true
-		})
+		@await Component.InvokeAsync("CountryCityCountyDiv")
 
 	</div>
 
@@ -111,19 +98,64 @@
 	id = "CreateInput",
 	text = @Messages.Create,
 	btnClass = "btn-success",
-	onClick = "createGradeLecture()"
+	onClick = "createUser()"
 	})
 
 </div>
 
 <script>
 
+	function isValidForm() {
+
+		var validationModels = [
+			{ inputId: "NameInput", defaultCondition: true },
+			{ inputId: "SurnameInput", defaultCondition: true },
+			{ inputId: "EmailInput", defaultCondition: true },
+			{ inputId: "DateOfBirthInput", defaultCondition: true },
+
+			{ inputId: "GradeInput", defaultCondition: false },
+			{ inputId: "SchoolInput", defaultCondition: true },
+			{ inputId: "CountryInput", defaultCondition: false },
+			{ inputId: "CityInput", defaultCondition: false },
+			{ inputId: "CountyInput", defaultCondition: false }
+		];
+
+		var controlValue = inputRequiredValidation(validationModels);
+
+		return controlValue;
+	}
+
 	function createUser() {
 
-		var gradeId = getInputVal('GradeInput');
+		var isValidCreate = isValidForm() & isPasswordsValid();
+
+		if (!isValidCreate) {
+			throw "validation failed";
+		}
+
+		var name = getInputVal('NameInput');
+		var surname = getInputVal('SurnameInput');
+		var email = getInputVal('EmailInput');
+		var password = getInputVal('PasswordInput');
+		var reenterPassword = getInputVal('ReenterPasswordInput');
+		var dateOfBirth = getInputVal('DateOfBirthInput');
+
+		var grade = getInputVal('GradeInput');
+		var school = getInputVal('SchoolInput');
+		var country = getInputVal('CountryInput');
+		var city = getInputVal('CityInput');
+		var county = getInputVal('CountyInput');
 
 		var data = {
-			GradeId: gradeId
+			Name: name,
+			Surname: surname,
+			Email: email,
+			Password: password,
+			ReenterPassword: reenterPassword,
+			DateOfBirth: dateOfBirth,
+			Grade: grade,
+			School: school,
+			County: county
 		};
 
 		var url = '/Admin/Users/Add';
@@ -142,35 +174,6 @@
 				break;
 			case "S":
 				toastrSuccess();
-				break;
-			default:
-				toastrError(anErrorOccurredMessage);
-				break;
-		}
-	}
-
-	function countrySelected() {
-
-		var country = getInputVal('CountryInput');
-
-		var url = `/Common/Address/GetCities/${country}`;
-		getJSonFromController(url, null, countrySelectedOnSuccess);
-
-	}
-
-	function countrySelectedOnSuccess(resp) {
-
-		stopLoading();
-
-		switch (resp.Type) {
-
-			case "E":
-				toastrError(resp.Message);
-				break;
-			case "S":
-
-				// cevapta gelen şehirleri listele ve bunu bir component'e çıkart
-
 				break;
 			default:
 				toastrError(anErrorOccurredMessage);

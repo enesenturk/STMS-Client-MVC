@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NS.STMS.MVC.Extensions;
 using NS.STMS.MVC.Settings;
@@ -11,18 +12,19 @@ namespace NS.STMS.MVC.Utility
 		#region CTOR
 
 		public readonly IHttpContextAccessor _httpContextAccessor;
+		public readonly IMapper _mapper;
 
-		private readonly AppSettings _appSettings;
-
+		public readonly AppSettings _appSettings;
 		public readonly string _viewsFolderPath;
 
-		public CustomBaseController(IHttpContextAccessor httpContextAccessor, IOptions<AppSettings> appSettings)
+		public CustomBaseController(IHttpContextAccessor httpContextAccessor, IMapper mapper, IOptions<AppSettings> appSettings)
 		{
 			_httpContextAccessor = httpContextAccessor;
-
+			_mapper = mapper;
 			_appSettings = appSettings.Value;
 
 			_viewsFolderPath = _httpContextAccessor.HttpContext.GetViewsFolderPath();
+			_mapper = mapper;
 		}
 
 		#endregion

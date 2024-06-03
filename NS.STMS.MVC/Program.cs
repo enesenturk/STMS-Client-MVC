@@ -28,6 +28,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.AddHttpContextAccessor();
 
 // inject dependencies
+builder.Services.BindMapper();
 builder.Services.BindSTMSServices();
 builder.Services.BindSorageServices();
 

@@ -90,13 +90,12 @@
 </body>
 
 @await Component.InvokeAsync("DropdownOperationHelper")
+@await Component.InvokeAsync("ExceptionHelper")
 @await Component.InvokeAsync("InputOperationHelper")
 @await Component.InvokeAsync("PostJsonHelper")
 @await Component.InvokeAsync("ToastrMessage")
 
 <script>
-
-	var anErrorOccurredMessage = "Error_Occurred";
 
 	function setDataForListFilter(filterStorageKey, currentPage) {
 		var data = getFilterParams(currentPage);

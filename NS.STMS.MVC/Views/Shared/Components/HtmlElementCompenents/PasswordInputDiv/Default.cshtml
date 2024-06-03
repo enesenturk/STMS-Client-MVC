@@ -1,4 +1,5 @@
-﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.PasswordInputDivComponentModel
+﻿@using Microsoft.AspNetCore.Html;
+@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.PasswordInputDivComponentModel
 
 <style>
 	.form-floating > .form-control {
@@ -16,10 +17,22 @@
 
 	.password-toggle-icon {
 		position: absolute;
-		top: 50%;
+		top: 30px;
 		right: 10px;
 		transform: translateY(-50%);
 		cursor: pointer;
+	}
+
+	.password-strength-bar {
+		height: 2px;
+		background-color: #ddd;
+		overflow: hidden;
+	}
+
+	#strength-bar-fill {
+		width: 0%;
+		height: 100%;
+		background-color: #4CAF50; /* Green color for strong */
 	}
 </style>
 
@@ -28,7 +41,10 @@
 	<div class="form-floating">
 		<input id="PasswordInput" type="password" class="form-control password-inputs" maxlength="20" autocomplete="off">
 		<label class="floating-input-lbl" for="PasswordInput">@Messages.Password</label>
-		<p id="PasswordInputError" class="inputErrorDesc"></p>
+		<div class="password-strength-bar">
+			<div id="strength-bar-fill"></div>
+		</div>
+		<p id="PasswordInputError" class="input-error-message"></p>
 		<span class="password-toggle-icon" onclick="togglePasswordVisibility()">
 			<i class="mdi mdi-eye"></i>
 		</span>
@@ -43,7 +59,7 @@
 
 		<div class="form-floating">
 			<input id="ReenterPasswordInput" type="password" class="form-control password-inputs" maxlength="20" autocomplete="off">
-			<label class="floating-input-lbl" for="ReenterPasswordInput">Reenter</label>
+			<label class="floating-input-lbl" for="ReenterPasswordInput">@Messages.Reenter_Password</label>
 		</div>
 
 	</div>
@@ -51,6 +67,82 @@
 }
 
 <script>
+
+	document.getElementById('PasswordInput').addEventListener('input', function () {
+
+		var password = getInputVal('PasswordInput');
+		var strength = getPasswordStrength(password);
+
+		updateStrengthBar(strength);
+	});
+	
+	document.getElementById('ReenterPasswordInput').addEventListener('input', function () {
+
+		hideError('PasswordInput');
+	});
+
+	function isPasswordsValid() {
+
+		var reenterPasswordActive = "@Model.ReenterPassword";
+
+		var password = getInputVal('PasswordInput');
+		var strength = getPasswordStrength(password);
+
+		if (strength != 5) {
+			$('#PasswordInputError').text("@TextHelper.ToHtml(Messages.Please_Strong_Password)");
+			return false;
+		}
+
+		if (reenterPasswordActive == "True") {
+
+			var reenterPassword = getInputVal('ReenterPasswordInput');
+
+			if (password != reenterPassword) {
+				$('#PasswordInputError').text("@TextHelper.ToHtml(Messages.Passwords_Dont_Match)");
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	function getPasswordStrength(password) {
+
+		var minLength = 6;
+
+		var hasLongText = password.length >= minLength;
+		var hasUpperCase = /[A-Z]/.test(password);
+		var hasLowerCase = /[a-z]/.test(password);
+		var hasDigit = /\d/.test(password);
+		var hasSpecialChar = /[!@@#$%^&*()_+{}\[\]:;<>,.?~]/.test(password);
+
+		var strength = 0;
+
+		if (hasLongText) {
+			strength++;
+		}
+		if (hasUpperCase) {
+			strength++;
+		}
+		if (hasLowerCase) {
+			strength++;
+		}
+		if (hasDigit) {
+			strength++;
+		}
+		if (hasSpecialChar) {
+			strength++;
+		}
+
+		return strength;
+	}
+
+	function updateStrengthBar(strength) {
+		var strengthBarFill = document.getElementById('strength-bar-fill');
+		var fillPercentage = (strength / 5) * 100;
+
+		strengthBarFill.style.width = `${fillPercentage}%`;
+	}
 
 	function togglePasswordVisibility() {
 

@@ -1,0 +1,81 @@
+﻿<style>
+
+	.show-error {
+		border: 1px solid #e30613;
+	}
+
+	.input-error-message {
+		font-size: 11px;
+		color: #e30613;
+		margin: 0px;
+		margin-left: 0px;
+	}
+</style>
+
+<script>
+
+	var anErrorOccurredMessage = "Error_Occurred";
+
+	$("input").click(function () {
+		hideError(this.id);
+	});
+
+	$('input').on('input', function () {
+		hideError(this.id);
+	});
+
+	$("select").click(function () {
+		hideError(this.id);
+	});
+
+	$("textarea").click(function () {
+		hideError(this.id);
+	});
+
+	function hideError(id) {
+
+		if (id == "")
+			return;
+
+		$("#" + id + "Error").text("");
+		$("#" + id + "").removeClass('show-error');
+	}
+
+	function inputRequiredValidation(validationModels) {
+
+		var allValid = true;
+
+		for (var i = 0; i < validationModels.length; i++) {
+
+			let { inputId, defaultCondition } = validationModels[i];
+
+			var message = "@TextHelper.ToHtml(Messages.Required_Field)";
+
+			// a text input
+			if (defaultCondition) {
+
+				if ($("#" + inputId + "").val().replace(/\s/g, '').replace(/,/g, '') == "") {
+					allValid = false;
+					$("#" + inputId + "").addClass('show-error');
+					$("#" + inputId + "Error").text(message);
+				}
+			}
+			// a select option input
+			else {
+
+				if (
+					$("#" + inputId + "").val() == "0"
+					|| $("#" + inputId + "").val() == "null"
+					|| $("#" + inputId + "").val() == null) {
+					allValid = false;
+					$("#" + inputId + "").addClass('show-error');
+					$("#" + inputId + "Error").text(message);
+				}
+			}
+
+		}
+
+		return allValid;
+	}
+
+</script>

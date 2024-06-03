@@ -2,6 +2,8 @@
 
 	function setDropDownOptions(options, dropDownId) {
 
+		$('#' + dropDownId).empty();
+
 		if (options != null) {
 			for (var i = 0; i < options.length; i++) {
 				$('#' + dropDownId).append(new Option(options[i].Value, options[i].Key));
