@@ -1,0 +1,36 @@
+.datepicker-title {
+    display: block !important;
+    height: 35px !important;
+}
+
+.datepicker.datepicker-dropdown, .datepicker.datepicker-inline {
+    padding: 0 25px !important;
+    width: fit-content !important;
+    max-width: 325px !important;
+    min-width: 275px !important;
+}
+
+.datepicker table tr td span.active.active, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled.disabled, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:hover.active, .datepicker table tr td span.active.disabled:hover.disabled, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active.disabled:hover[disabled], .datepicker table tr td span.active.disabled[disabled], .datepicker table tr td span.active:active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active:hover.active, .datepicker table tr td span.active:hover.disabled, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active:hover:hover, .datepicker table tr td span.active:hover[disabled], .datepicker table tr td span.active[disabled] {
+    background-color: #BDD1E9 !important;
+}
+
+    .datepicker table tr td span.active, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active:hover {
+        background-color: #BDD1E9 !important;
+        background-image: none !important
+    }
+
+.datepicker td,
+.datepicker th {
+    text-align: center !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+}
+
+.datepicker.datepicker-dropdown .datepicker-days table.table-condensed tbody td.day.active:before, .datepicker.datepicker-inline .datepicker-days table.table-condensed tbody td.day.active:before {
+    background: #00cccd !important;
+}
+
+.datepicker.datepicker-dropdown .datepicker-days table.table-condensed thead tr th.prev, .datepicker.datepicker-dropdown .datepicker-days table.table-condensed thead tr th.next, .datepicker.datepicker-inline .datepicker-days table.table-condensed thead tr th.prev, .datepicker.datepicker-inline .datepicker-days table.table-condensed thead tr th.next {
+    height: 35px !important;
+    width: 35px !important;
+}

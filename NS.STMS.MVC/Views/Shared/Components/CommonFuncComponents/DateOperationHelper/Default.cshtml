@@ -1,0 +1,121 @@
+﻿<script>
+
+	var dateInputIds = [];
+	var _dateFormat = 'yyyy-mm-dd';
+	var _dateSplitter = '-';
+
+	$(document).ready(function () {
+
+		initMyDates();
+
+		createDateMask();
+
+		var datePickerStart = new Date("1900-01-01 00:00:00");
+
+		for (let i = 0; i < dateInputIds.length; i++) {
+
+			$('#' + dateInputIds[i]).datepicker({
+				format: _dateFormat,
+				autoclose: true,
+				language: 'my-dates',
+				todayHighlight: true,
+				startDate: datePickerStart
+			});
+		}
+	});
+
+	function initMyDates() {
+
+		$.fn.datepicker.dates['my-dates'] = {
+			days: [
+				"@TextHelper.ToHtml(Messages.Sunday)",
+				"@TextHelper.ToHtml(Messages.Monday)",
+				"@TextHelper.ToHtml(Messages.Tuesday)",
+				"@TextHelper.ToHtml(Messages.Wednesday)",
+				"@TextHelper.ToHtml(Messages.Thursday)",
+				"@TextHelper.ToHtml(Messages.Friday)",
+				"@TextHelper.ToHtml(Messages.Saturday)"
+			],
+			daysShort: [
+				"@TextHelper.ToHtml(Messages.Sunday_Short)",
+				"@TextHelper.ToHtml(Messages.Monday_Short)",
+				"@TextHelper.ToHtml(Messages.Tuesday_Short)",
+				"@TextHelper.ToHtml(Messages.Wednesday_Short)",
+				"@TextHelper.ToHtml(Messages.Thursday_Short)",
+				"@TextHelper.ToHtml(Messages.Friday_Short)",
+				"@TextHelper.ToHtml(Messages.Saturday_Short)"
+			],
+			daysMin: [
+				"@TextHelper.ToHtml(Messages.Sunday_Short)",
+				"@TextHelper.ToHtml(Messages.Monday_Short)",
+				"@TextHelper.ToHtml(Messages.Tuesday_Short)",
+				"@TextHelper.ToHtml(Messages.Wednesday_Short)",
+				"@TextHelper.ToHtml(Messages.Thursday_Short)",
+				"@TextHelper.ToHtml(Messages.Friday_Short)",
+				"@TextHelper.ToHtml(Messages.Saturday_Short)"
+			],
+			months: [
+				"@TextHelper.ToHtml(Messages.January)",
+				"@TextHelper.ToHtml(Messages.February)",
+				"@TextHelper.ToHtml(Messages.March)",
+				"@TextHelper.ToHtml(Messages.April)",
+				"@TextHelper.ToHtml(Messages.May)",
+				"@TextHelper.ToHtml(Messages.June)",
+				"@TextHelper.ToHtml(Messages.July)",
+				"@TextHelper.ToHtml(Messages.August)",
+				"@TextHelper.ToHtml(Messages.September)",
+				"@TextHelper.ToHtml(Messages.October)",
+				"@TextHelper.ToHtml(Messages.November)",
+				"@TextHelper.ToHtml(Messages.December)"
+			],
+			monthsShort: [
+				"@TextHelper.ToHtml(Messages.January_Short)",
+				"@TextHelper.ToHtml(Messages.February_Short)",
+				"@TextHelper.ToHtml(Messages.March_Short)",
+				"@TextHelper.ToHtml(Messages.April_Short)",
+				"@TextHelper.ToHtml(Messages.May_Short)",
+				"@TextHelper.ToHtml(Messages.June_Short)",
+				"@TextHelper.ToHtml(Messages.July_Short)",
+				"@TextHelper.ToHtml(Messages.August_Short)",
+				"@TextHelper.ToHtml(Messages.September_Short)",
+				"@TextHelper.ToHtml(Messages.October_Short)",
+				"@TextHelper.ToHtml(Messages.November_Short)",
+				"@TextHelper.ToHtml(Messages.December_Short)"
+			],
+			today: "@TextHelper.ToHtml(Messages.Today)",
+			clear: "@TextHelper.ToHtml(Messages.Clear)"
+		};
+
+	}
+
+	function getDateMask() {
+
+		var dateParts = _dateFormat.split(_dateSplitter);
+
+		for (var i = 0; i < dateParts.length; i++) {
+
+			var partLength = dateParts[i].length;
+
+			var maskPart = "";
+			for (var j = 0; j < partLength; j++) {
+				maskPart += "#";
+			}
+
+			dateParts[i] = maskPart;
+		}
+
+		var mask = dateParts.join(_dateSplitter);
+
+		return mask;
+	}
+
+	function createDateMask() {
+
+		var mask = getDateMask();
+
+		$('.date-mask').mask(mask, { reverse: true });
+		$('.date-mask').attr('maxlength', 10);
+	}
+
+
+</script>

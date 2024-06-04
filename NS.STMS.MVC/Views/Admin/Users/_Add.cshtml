@@ -45,11 +45,10 @@
 		maxLength = 100
 		})
 
-		@await Component.InvokeAsync("InputDiv", new
+		@await Component.InvokeAsync("DateInputDiv", new
 		{
 		id = "DateOfBirthInput",
-		key = @Messages.Date_of_Birth,
-		maxLength = 100
+		key = @Messages.Date_of_Birth
 		})
 
 		@await Component.InvokeAsync("PasswordInputDiv", new

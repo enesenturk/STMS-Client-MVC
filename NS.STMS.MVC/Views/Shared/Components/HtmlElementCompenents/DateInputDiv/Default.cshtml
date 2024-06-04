@@ -1,0 +1,34 @@
+﻿@model NS.STMS.MVC.Models.ComponentModels.HtmlElementCompenents.DateInputDivComponentModel
+
+<div class="col-lg-2 col-md-6 col-sm-12">
+	<div class="form-floating">
+		<input id="@Model.Id" type="text" class="form-control date-mask" autocomplete="off">
+		<label class="floating-input-lbl" for="@Model.Id">@Model._key</label>
+		<p id="@Model.ErrorId" class="input-error-message"></p>
+	</div>
+</div>
+
+<script>
+
+	function pushDateInputToArray() {
+
+		dateInputIds.push('@Model.Id');
+	}
+
+	//document ready
+	$(function () {
+
+		waitForObject(dateInputIds, pushDateInputToArray);
+
+		var inputId = "@Model.Id";
+		var value = "@Model._value";
+		var disabled = "@Model.Disabled";
+
+		setInputVal(inputId, value);
+
+		if (disabled == "True") {
+			setInputDisabled(inputId);
+		}
+	});
+
+</script>
