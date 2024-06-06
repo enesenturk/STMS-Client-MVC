@@ -13,3 +13,5 @@
 /NS.STMS.MVC/NS.STMS.MVC.csproj.user
 /create table.sql
 /NS.STMS.Caching/obj
+/NS.STMS.CORE/bin/Release/net7.0
+/NS.STMS.MVC/bin/Release/net7.0
