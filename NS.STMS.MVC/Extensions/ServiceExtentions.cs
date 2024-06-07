@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using NS.STMS.MVC.Extracteds;
+using NS.STMS.MVC.Mappings;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Commands.CreateGradeLecture.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGradeLectures.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.GradeLectures.Queries.GetGrades.Managers;
@@ -8,6 +10,9 @@ using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Commands.Cr
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Mappings;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetAddUserOptions.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetUsers.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Commands.AcceptTermsAndConditions.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Mappings;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Queries.Login.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Common.Addresses.Queries.GetCities.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Common.Addresses.Queries.GetCounties.Managers;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Abstract;
@@ -19,11 +24,18 @@ namespace NS.STMS.MVC.Extensions
 	public static class ServiceExtentions
 	{
 
+		public static void BindExtracteds(this IServiceCollection services)
+		{
+			services.AddSingleton<AccountControllerExtracteds>();
+		}
+
 		public static void BindMapper(this IServiceCollection services)
 		{
 			// AutoMapper Configurations
 			var mapperConfig = new MapperConfiguration(mc =>
 			{
+				mc.AddProfile(new AuthorizationProfile());
+				mc.AddProfile(new LoginProfile());
 				mc.AddProfile(new UsersProfile());
 			});
 
@@ -56,6 +68,13 @@ namespace NS.STMS.MVC.Extensions
 
 			#endregion
 
+			#region Authorization
+
+			services.AddSingleton<IAcceptTermsAndConditionsService, AcceptTermsAndConditionsService>();
+			services.AddSingleton<ILoginService, LoginService>();
+
+			#endregion
+
 			#region Common
 
 			#region Address
@@ -74,6 +93,7 @@ namespace NS.STMS.MVC.Extensions
 			services.AddSingleton<ICookieService, CookieService>();
 
 			services.AddSingleton<IGlobalizationStorage, CookieGlobalizationStorage>();
+			services.AddSingleton<ILoginUserStorage, CookieLoginUserStorage>();
 
 		}
 

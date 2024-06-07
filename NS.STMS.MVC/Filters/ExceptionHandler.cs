@@ -8,6 +8,7 @@ using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Mana
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Dtos;
 using NS.STMS.MVC.Preferences.CookiePreferences;
 using NS.STMS.Resources.Language.Languages;
+using NS.STMS.CORE.Utilities.ExceptionHandling;
 
 namespace NS.STMS.MVC.Filters
 {
@@ -16,6 +17,19 @@ namespace NS.STMS.MVC.Filters
 
 		public override void OnException(ExceptionContext filterContext)
 		{
+			Type exceptionType = filterContext.Exception.GetType();
+
+			bool isAuthorizationException = exceptionType == typeof(AuthorizationException);
+
+			if (isAuthorizationException)
+			{
+				filterContext.Result = new RedirectToRouteResult(
+					new RouteValueDictionary {
+						{ "action", "LogOut" },
+						{ "controller", "Account" }
+					});
+			}
+
 			Type actionReturnType = GetActionReturnType(filterContext);
 
 			if (
@@ -46,6 +60,7 @@ namespace NS.STMS.MVC.Filters
 
 			filterContext.ExceptionHandled = true;
 
+			// TODO
 			ICookieService cookieService = (ICookieService)filterContext.HttpContext.RequestServices.GetService(typeof(ICookieService));
 			cookieService.Set(new CookieModel
 			{

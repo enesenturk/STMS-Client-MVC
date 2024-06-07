@@ -1,0 +1,194 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>STMS | Student Management</title>
+	<link rel="shortcut icon" href="~/images/logos/favicon.ico">
+
+	<link rel="stylesheet" href="~/vendors/bootstrap/bootstrap-5.0.2.min.css" />
+	<link rel="stylesheet" href="~/css/before-login.css" />
+	<link rel="stylesheet" href="~/css/scroll-style.css" />
+
+	<script src="~/js/jquery-3.7.1.min.js"></script>
+
+	<style>
+		.message-text {
+			color: white;
+		}
+
+		.message-box {
+			max-height: 300px;
+			overflow-y: auto;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-lg-3 col-md-2"></div>
+			<div class="col-lg-6 col-md-8 login-box">
+				<div class="col-lg-12 login-key">
+					<img class="logo" src="~/images/logos/logo.png" />
+				</div>
+
+				<div class="col-lg-12 login-form">
+
+					<div class="col-sm-12">
+						<h4 class="message-text">STMS - TERMS and CONDITIONS</h4>
+					</div>
+
+					<div class="message-box">
+
+						<br />
+
+						<div class="col-sm-12">
+
+							<p class="message-text">
+								Introduction
+							</p>
+							<p class="message-text">
+								Welcome to our Student Teacher Management System! By using this platform, you agree to the following terms and conditions. Please read them carefully.
+							</p>
+							<p class="message-text">
+								1. User Consent
+							</p>
+							<p class="message-text">
+								By accessing and using our system, you consent to the collection, storage, and processing of your personal information as described in this document.
+							</p>
+							<p class="message-text">
+								2. Information Sharing
+							</p>
+							<p class="message-text">
+								Our system allows users (students, teachers, and administrators) to interact with each other.
+								User information (such as names, email addresses, and profile pictures) may be visible to other users within the application.
+								We do not share user information outside the application.
+							</p>
+							<p class="message-text">
+								3. Cookies
+							</p>
+							<p class="message-text">
+								We use cookies to enhance your browsing experience and improve system functionality.
+								By using our system, you consent to the use of cookies as described in our Cookie Policy.
+							</p>
+							<p class="message-text">
+								4. Data Security
+							</p>
+							<p class="message-text">
+								We take data security seriously.
+								User data is encrypted and stored securely.
+								Unauthorized access to user information is strictly prohibited.
+							</p>
+							<p class="message-text">
+								5. Changes to Terms
+							</p>
+							<p class="message-text">
+								We reserve the right to update these terms and conditions.
+								Any changes will be communicated to users via email or system notifications.
+							</p>
+							<p class="message-text">
+								6. Contact Us
+							</p>
+							<p class="message-text">
+								If you have any questions or concerns, please contact our support team at support@example.com.
+							</p>
+						</div>
+
+					</div>
+
+					<div class="col-sm-12">
+						<p class="message-text">
+							<input type="checkbox" id="AcceptTermsAndConditions" onclick="acceptTermsAndConditions()">
+							Herewith I confirm that I have read and understood STMS terms policy.
+						</p>
+					</div>
+
+					<br />
+
+					<div class="col-sm-12" style="text-align:right;">
+						<button type="button" class="btn btn-primary" id="ContinueBtn" onclick="continueToHome()" disabled>Continue</button>
+						<button type="button" class="btn btn-danger" id="LogoutBtn" onclick="window.location.href='/Account/Logout'">Logout</button>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+@await Component.InvokeAsync("Loading")
+@await Component.InvokeAsync("ExceptionHelper")
+@await Component.InvokeAsync("InputOperationHelper")
+@await Component.InvokeAsync("PostJsonHelper")
+@await Component.InvokeAsync("ToastrMessage")
+
+<script>
+
+	function acceptTermsAndConditions() {
+		var checked = $("#AcceptTermsAndConditions").prop('checked');
+
+		if (checked) {
+			$("#ContinueBtn").attr("disabled", false);
+		}
+		else {
+			$("#ContinueBtn").attr("disabled", true);
+		}
+	}
+
+	function continueToHome() {
+
+		var checked = $("#AcceptTermsAndConditions").prop('checked');
+
+		if (checked) {
+
+			var data = null;
+			var url = '/Account/AcceptTermsAndConditions';
+			postJSonToController(url, data, continueToHomeOnSuccess);
+		}
+		else {
+			toastrError('Accept terms and conditions to continue!');
+		}
+
+	}
+
+	function continueToHomeOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "UpdatePasswordRequired":
+				setTimeout(function () {
+					window.location.href = '/Account/UpdatePasswordRequired';
+				}, 2000);
+				break;
+			case "S":
+				setTimeout(function () {
+					window.location.href = "/Home/Index";
+				}, 2000);
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,137 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>STMS | Student Management</title>
+	<link rel="shortcut icon" href="~/images/logos/favicon.ico">
+
+	<link rel="stylesheet" href="~/vendors/bootstrap/bootstrap-5.0.2.min.css" />
+	<link rel="stylesheet" href="~/css/before-login.css" />
+	<link rel="stylesheet" href="~/css/scroll-style.css" />
+
+	<script src="~/js/jquery-3.7.1.min.js"></script>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-2"></div>
+			<div class="col-lg-6 col-md-8 login-box">
+				<div class="col-lg-12 login-key">
+					<img class="logo" src="~/images/logos/logo.png" />
+				</div>
+
+				<div class="col-lg-12 login-form">
+
+					<div class="form-group">
+						<label class="form-control-label">@Messages.Email_Upper</label>
+						<input id="EmailInput" type="text" class="form-control" autocomplete="off">
+					</div>
+
+					<div class="form-group">
+						<label class="form-control-label">@Messages.Password_Upper</label>
+						<input id="PasswordInput" type="password" class="form-control" />
+					</div>
+
+					<div class="row col-12">
+						<div class="offset-md-3 col-md-6 login-btn-div">
+							<button class="btn login-btn" onclick="login()">@Messages.Login_Upper</button>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="row col-12 register-container">
+							<div class="col-sm-6 register-text-div">
+								<span>@Messages.Dont_Have_Account</span>
+							</div>
+							<div class="col-sm-6 register-link-div">
+								<a href="/Account/Register">@Messages.Register_Upper</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+@await Component.InvokeAsync("Loading")
+@await Component.InvokeAsync("ExceptionHelper")
+@await Component.InvokeAsync("InputOperationHelper")
+@await Component.InvokeAsync("PostJsonHelper")
+@await Component.InvokeAsync("ToastrMessage")
+
+<script>
+
+	function isValidForm() {
+
+		var validationModels = [
+			{ inputId: "PasswordInput", defaultCondition: true },
+			{ inputId: "EmailInput", defaultCondition: true }
+		];
+
+		var controlValue = inputRequiredValidation(validationModels);
+
+		return controlValue;
+	}
+
+	function login() {
+
+		var isValidCreate = isValidForm();
+
+		if (!isValidCreate) {
+			throw "validation failed";
+		}
+
+		var email = getInputVal('EmailInput');
+		var password = getInputVal('PasswordInput');
+
+		var data = {
+			Email: email,
+			Password: password
+		};
+
+		var url = '/Account/Login';
+		postJSonToController(url, data, loginOnSuccess);
+
+	}
+
+	function loginOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "TermsAndConditions":
+				window.location.href = '/Account/TermsAndConditions';
+				break;
+			case "UpdatePasswordRequired":
+				window.location.href = '/Account/UpdatePasswordRequired';
+				break;
+			case "S":
+				window.location.href = '/Home/Index';
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
+
+</script>
+
+</html>

@@ -21,10 +21,9 @@ namespace NS.STMS.MVC.Utility
 		{
 			_httpContextAccessor = httpContextAccessor;
 			_mapper = mapper;
-			_appSettings = appSettings.Value;
 
+			_appSettings = appSettings.Value;
 			_viewsFolderPath = _httpContextAccessor.HttpContext.GetViewsFolderPath();
-			_mapper = mapper;
 		}
 
 		#endregion

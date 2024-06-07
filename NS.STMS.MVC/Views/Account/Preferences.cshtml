@@ -1,0 +1,31 @@
+﻿@model NS.STMS.MVC.Models.Account.Preferences.PreferencesViewModel
+
+@await Component.InvokeAsync("PageHeader", new { model = Model.PageHeader })
+
+<div class="col-12">
+
+	@await Component.InvokeAsync("InputDropDownDiv", new
+	{
+	id = "DateFormatInput",
+	key = @Messages.Date_Format_Preference,
+	value = Model.PreferredDateFormat,
+	options = Model.SupportedDateFormats
+	})
+
+	@await Component.InvokeAsync("InputDropDownDiv", new
+	{
+	id = "NumberFormatInput",
+	key = @Messages.Number_Format_Preference,
+	value = Model.PreferredNumberFormat,
+	options = Model.SupportedNumberFormats
+	})
+
+	@await Component.InvokeAsync("InputDropDownDiv", new
+	{
+	id = "LanguageInput",
+	key = @Messages.Language_Preference,
+	value = Model.PreferredLanguage,
+	options = Model.SupportedLanguages
+	})
+
+</div>

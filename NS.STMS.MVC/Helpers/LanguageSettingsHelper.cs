@@ -1,19 +1,35 @@
-﻿using System.Globalization;
+﻿using NS.STMS.MVC.Models;
+using System.Globalization;
 
 namespace NS.STMS.MVC.Helpers
 {
 	public class LanguageSettingsHelper
 	{
 
-		private static string _defaultLanguage = "tr-TR";
+		private static string _defaultLanguage = "en-US";
 
 		public static List<string> GetSupportedLanguages()
 		{
 			return new List<string>
 			{
-				"tr-TR",
-				"en-US"
+				"en-US",
+				"tr-TR"
 			};
+		}
+
+		public static List<JSonDto> GetSupportedLanguageDropdown()
+		{
+			List<JSonDto> dropdown = new List<JSonDto>();
+
+			var supportedLanguages = GetSupportedLanguages();
+
+			supportedLanguages.ForEach(x => dropdown.Add(new JSonDto
+			{
+				Key = x,
+				Value = x
+			}));
+
+			return dropdown;
 		}
 
 		public static List<CultureInfo> GetSupportedLanguageCultures()

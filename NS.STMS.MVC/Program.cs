@@ -28,6 +28,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.AddHttpContextAccessor();
 
 // inject dependencies
+builder.Services.BindExtracteds();
 builder.Services.BindMapper();
 builder.Services.BindSTMSServices();
 builder.Services.BindSorageServices();
@@ -39,6 +40,7 @@ builder.Services.AddMvc(options =>
 		options.MaxModelBindingCollectionSize = int.MaxValue;
 
 		options.Filters.Add(typeof(ExceptionHandler));
+		options.Filters.Add(typeof(TrackExecution));
 	})
 	.AddViewLocalization()
 	.AddJsonOptions(options =>
