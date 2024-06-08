@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
 using NS.STMS.CORE.Helpers;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Abstract;
 using NS.STMS.MVC.Models.Account.Authentication;
+using NS.STMS.MVC.Extensions;
+using NS.STMS.MVC.Helpers;
 
 namespace NS.STMS.MVC.Filters
 {
@@ -22,8 +23,10 @@ namespace NS.STMS.MVC.Filters
 			bool hasTicket = TicketControl(filterContext);
 
 			if (!hasTicket)
-				ClearAndRedirectToLogin(filterContext);
+				ActionResultHelper.ClearAndRedirectToLogin(ref filterContext);
 		}
+
+		#region extracted methods
 
 		private bool TicketControl(ActionExecutingContext filterContext)
 		{
@@ -54,12 +57,8 @@ namespace NS.STMS.MVC.Filters
 				return true;
 			}
 
-			bool canAccess = CheckNoDirectAccess(filterContext);
-
-			return canAccess;
+			return true;
 		}
-
-		#region extracted methods
 
 		private bool IsRequiredCookiesExist(ILoginUserStorage loginUserStorage)
 		{
@@ -78,56 +77,19 @@ namespace NS.STMS.MVC.Filters
 			return true;
 		}
 
-		private bool CheckNoDirectAccess(ActionExecutingContext filterContext)
-		{
-			string controllerName = filterContext.RouteData.Values["controller"].ToString();
-
-			if (controllerName == "Home")
-				return true;
-
-			bool canAcess = false;
-
-			var referer = filterContext.HttpContext.Request.Headers["Referer"].ToString();
-
-			if (!string.IsNullOrEmpty(referer))
-			{
-				var rUri = new UriBuilder(referer).Uri;
-				var req = filterContext.HttpContext.Request;
-
-				if (
-					req.Host.Host == rUri.Host
-					/*&& req.Host.Port == rUri.Port*/
-					&& req.Scheme == rUri.Scheme
-					)
-					canAcess = true;
-			}
-
-			return canAcess;
-		}
-
 		#region Track/Let Pages
 
 		private bool GetDoNotTrack(string controllerName, string actionName)
 		{
 			return
+				(controllerName == "Account" && actionName == "AcceptTermsAndConditions") ||
+				(controllerName == "Account" && actionName == "ForgotPassword") ||
 				(controllerName == "Account" && actionName == "Globalize") ||
-				(controllerName == "Account" && actionName == "SetDefaultLanguage") ||
 				(controllerName == "Account" && actionName == "Login") ||
 				(controllerName == "Account" && actionName == "LogOut") ||
-				(controllerName == "Account" && actionName == "TermsAndConditions") ||
-				(controllerName == "Account" && actionName == "AcceptTermsAndConditions");
-		}
-
-		private void ClearAndRedirectToLogin(ActionExecutingContext filterContext)
-		{
-			filterContext.Result = new RedirectToRouteResult(
-				new RouteValueDictionary(
-					new
-					{
-						controller = "Account",
-						action = "LogOut"
-					})
-				);
+				(controllerName == "Account" && actionName == "ResetPassword") ||
+				(controllerName == "Account" && actionName == "SetDefaultLanguage") ||
+				(controllerName == "Account" && actionName == "TermsAndConditions");
 		}
 
 		#endregion

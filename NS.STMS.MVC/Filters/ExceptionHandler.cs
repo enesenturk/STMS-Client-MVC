@@ -9,6 +9,7 @@ using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Dtos
 using NS.STMS.MVC.Preferences.CookiePreferences;
 using NS.STMS.Resources.Language.Languages;
 using NS.STMS.CORE.Utilities.ExceptionHandling;
+using NS.STMS.MVC.Helpers;
 
 namespace NS.STMS.MVC.Filters
 {
@@ -23,11 +24,9 @@ namespace NS.STMS.MVC.Filters
 
 			if (isAuthorizationException)
 			{
-				filterContext.Result = new RedirectToRouteResult(
-					new RouteValueDictionary {
-						{ "action", "LogOut" },
-						{ "controller", "Account" }
-					});
+				ActionResultHelper.ClearAndRedirectToLogin(ref filterContext);
+				
+				return;
 			}
 
 			Type actionReturnType = GetActionReturnType(filterContext);

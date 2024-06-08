@@ -28,10 +28,11 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Abstract
 
 		#endregion
 
-		#region Email
+		#region Encrypted Parameter
 
-		void SetEmail(string email);
-		string GetEmail();
+		void DeleteEncryptedParameter(string name);
+		string GetEncryptedParameter(string name);
+		void SetEncryptedParameter(string name, string parameter);
 
 		#endregion
 

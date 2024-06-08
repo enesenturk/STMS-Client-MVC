@@ -4,6 +4,7 @@ using NS.STMS.MVC.Models;
 using NS.STMS.MVC.Models.Account.Authentication;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Queries.Login.Dtos;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Abstract;
+using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Constants;
 using NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie.Managers;
 using NS.STMS.Resources.Language.Languages;
 using System.Net;
@@ -66,7 +67,7 @@ namespace NS.STMS.MVC.Extracteds
 
 				if (response.StatusCode == HttpStatusCode.Found)
 				{
-					_loginUserStorage.SetEmail(model.Email);
+					_loginUserStorage.SetEncryptedParameter(CookieLoginUserConstants.CookieName_Email, model.Email);
 
 					return new BaseResponseModel
 					{

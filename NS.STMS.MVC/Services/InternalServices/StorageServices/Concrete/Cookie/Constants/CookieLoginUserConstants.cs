@@ -11,6 +11,14 @@
 			}
 		}
 
+		public static string CookieName_ForgotPasswordToken
+		{
+			get
+			{
+				return "_frpt";
+			}
+		}
+
 		public static string CookieName_Email
 		{
 			get

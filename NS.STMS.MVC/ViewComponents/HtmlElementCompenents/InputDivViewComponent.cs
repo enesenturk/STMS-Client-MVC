@@ -15,7 +15,9 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 			int maxLength,
 			string onChange,
 			string type = "text",
-			bool disabled = false
+			bool disabled = false,
+			string inputClasses = "",
+			string containerClasses = "col-lg-2 col-md-6 col-sm-12"
 			)
 		{
 			string path = GetType().GetViewComponentPath();
@@ -25,6 +27,8 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 				Id = id,
 				Type = type,
 				MaxLength = maxLength,
+				ContainerClasses = containerClasses,
+				InputClasses = inputClasses,
 
 				_key = key,
 				_value = value == null ? null : value.ToString(),

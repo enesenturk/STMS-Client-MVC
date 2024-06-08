@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NS.STMS.Resources.Language" Version="0.0.17" />
+    <PackageReference Include="NS.STMS.Resources.Language" Version="0.0.19" />
     <PackageReference Include="NS.STMS.Resources.Security" Version="0.0.0" />
   </ItemGroup>
 

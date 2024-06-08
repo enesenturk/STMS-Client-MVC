@@ -11,7 +11,9 @@ using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Mappings;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetAddUserOptions.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Admin.Users.Queries.GetUsers.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Commands.AcceptTermsAndConditions.Managers;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Commands.ResetPassword.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Mappings;
+using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Queries.ForgotPassword.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Authorization.Queries.Login.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Common.Addresses.Queries.GetCities.Managers;
 using NS.STMS.MVC.Services.ExternalServices.STMSServices.Common.Addresses.Queries.GetCounties.Managers;
@@ -71,7 +73,9 @@ namespace NS.STMS.MVC.Extensions
 			#region Authorization
 
 			services.AddSingleton<IAcceptTermsAndConditionsService, AcceptTermsAndConditionsService>();
+			services.AddSingleton<IForgotPasswordService, ForgotPasswordService>();
 			services.AddSingleton<ILoginService, LoginService>();
+			services.AddSingleton<IResetPasswordService, ResetPasswordService>();
 
 			#endregion
 

@@ -9,7 +9,8 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 	{
 
 		public ViewViewComponentResult Invoke(
-			bool reenter
+			bool reenter,
+			string containerClasses = "col-lg-2 col-md-6 col-sm-12"
 			)
 		{
 			string path = GetType().GetViewComponentPath();
@@ -17,6 +18,7 @@ namespace NS.STMS.MVC.ViewComponents.HtmlElementCompenents
 			PasswordInputDivComponentModel model = new PasswordInputDivComponentModel
 			{
 				ReenterPassword = reenter,
+				ContainerClasses = containerClasses
 			};
 
 			return View(path, model);

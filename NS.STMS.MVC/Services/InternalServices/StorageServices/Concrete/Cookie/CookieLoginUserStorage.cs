@@ -151,29 +151,34 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie
 
 		#region Email
 
-		public void SetEmail(string email)
+		public void DeleteEncryptedParameter(string name)
 		{
-			string emailEncrypted = EncryptionHelper.Encrypt(email, CookieLoginUserConstants.EncrtyptionKey);
+			_cookieService.Remove(name);
+		}
+
+		public string GetEncryptedParameter(string name)
+		{
+			string parameterEncrypted = _cookieService.Get(name);
+
+			if (string.IsNullOrEmpty(parameterEncrypted))
+				return null;
+
+			string parameter = EncryptionHelper.Decrypt(parameterEncrypted, CookieLoginUserConstants.EncrtyptionKey);
+
+			return parameter;
+		}
+
+		public void SetEncryptedParameter(string name, string parameter)
+		{
+			string parameterEncrypted = EncryptionHelper.Encrypt(parameter, CookieLoginUserConstants.EncrtyptionKey);
 
 			_cookieService.Set(new CookieModel
 			{
-				key = CookieLoginUserConstants.CookieName_Email,
-				value = emailEncrypted,
+				key = name,
+				value = parameterEncrypted,
 				httpOnly = true,
 				expire = DateTimeHelper.GetNowPlusDays(CookieTimeoutPreferences.NonSensitiveTimeoutDays)
 			});
-		}
-
-		public string GetEmail()
-		{
-			string emailEncrypted = _cookieService.Get(CookieLoginUserConstants.CookieName_Email);
-
-			if (string.IsNullOrEmpty(emailEncrypted))
-				return null;
-
-			string email = EncryptionHelper.Decrypt(emailEncrypted, CookieLoginUserConstants.EncrtyptionKey);
-
-			return email;
 		}
 
 		#endregion

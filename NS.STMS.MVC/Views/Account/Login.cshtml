@@ -32,19 +32,36 @@
 
 				<div class="col-lg-12 login-form">
 
-					<div class="form-group">
-						<label class="form-control-label">@Messages.Email_Upper</label>
-						<input id="EmailInput" type="text" class="form-control" autocomplete="off">
-					</div>
+					@await Component.InvokeAsync("InputDiv", new
+					{
+					id = "EmailInput",
+					key = @Messages.Email,
+					maxLength = 100,
+					containerClasses = "col-12 input-container",
+					inputClasses = "login-input"
+					})
 
-					<div class="form-group">
-						<label class="form-control-label">@Messages.Password_Upper</label>
-						<input id="PasswordInput" type="password" class="form-control" />
-					</div>
+					@await Component.InvokeAsync("InputDiv", new
+					{
+					id = "PasswordInput",
+					key = @Messages.Password,
+					maxLength = 20,
+					type = "password",
+					containerClasses = "col-12 input-container",
+					inputClasses = "login-input"
+					})
 
 					<div class="row col-12">
 						<div class="offset-md-3 col-md-6 login-btn-div">
 							<button class="btn login-btn" onclick="login()">@Messages.Login_Upper</button>
+						</div>
+					</div>
+
+					<div class="form-group" style="margin-bottom:20px;">
+						<div class="row col-12 forgot-password-container">
+							<div class="col-sm-6 forgot-password-link-div">
+								<span><a href="javascript:forgotPassword();">@Messages.Forgot_Password_Link</a></span>
+							</div>
 						</div>
 					</div>
 
@@ -75,23 +92,24 @@
 
 <script>
 
-	function isValidForm() {
+	function isValidLogin() {
 
-		var validationModels = [
-			{ inputId: "PasswordInput", defaultCondition: true },
-			{ inputId: "EmailInput", defaultCondition: true }
-		];
+		var email = getInputVal('EmailInput');
+		var password = getInputVal('PasswordInput');
 
-		var controlValue = inputRequiredValidation(validationModels);
+		if (email == "" || password == "") {
+			toastrError("@TextHelper.ToHtml(Messages.Please_Enter_Email_Password)");
+			return false;
+		}
 
-		return controlValue;
+		return true;
 	}
 
 	function login() {
 
-		var isValidCreate = isValidForm();
+		var isValid = isValidLogin();
 
-		if (!isValidCreate) {
+		if (!isValid) {
 			throw "validation failed";
 		}
 
@@ -132,6 +150,54 @@
 		}
 	}
 
+	function isValidForgotPassword() {
+
+		var email = getInputVal('EmailInput');
+
+		if (email == "") {
+			toastrError("@TextHelper.ToHtml(Messages.Please_Enter_Email)");
+			return false;
+		}
+
+		return true;
+	}
+
+	function forgotPassword() {
+
+		var isValid = isValidForgotPassword();
+
+		if (!isValid) {
+			throw "validation failed";
+		}
+
+		var email = getInputVal('EmailInput');
+
+		var data = {
+			Email: email
+		};
+
+		var url = '/Account/ForgotPassword';
+		postJSonToController(url, data, forgotPasswordOnSuccess);
+
+	}
+
+	function forgotPasswordOnSuccess(resp) {
+
+		stopLoading();
+
+		switch (resp.Type) {
+
+			case "E":
+				toastrError(resp.Message);
+				break;
+			case "S":
+				toastrSuccess("@TextHelper.ToHtml(Messages.Forgot_Password_Email_Sent)");
+				break;
+			default:
+				toastrError(anErrorOccurredMessage);
+				break;
+		}
+	}
 </script>
 
 </html>

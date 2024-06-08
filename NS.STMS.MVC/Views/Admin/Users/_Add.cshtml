@@ -126,7 +126,7 @@
 
 	function createUser() {
 
-		var isValidCreate = isValidForm() & isPasswordsValid();
+		var isValidCreate = isValidForm() & isPasswordValid();
 
 		if (!isValidCreate) {
 			throw "validation failed";

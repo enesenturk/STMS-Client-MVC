@@ -40,6 +40,7 @@ builder.Services.AddMvc(options =>
 		options.MaxModelBindingCollectionSize = int.MaxValue;
 
 		options.Filters.Add(typeof(ExceptionHandler));
+		options.Filters.Add(typeof(NoDirectAccess));
 		options.Filters.Add(typeof(TrackExecution));
 	})
 	.AddViewLocalization()

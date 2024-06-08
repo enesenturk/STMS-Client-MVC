@@ -36,7 +36,7 @@
 	}
 </style>
 
-<div class="col-lg-2 col-md-6 col-sm-12">
+<div class="@Model.ContainerClasses">
 
 	<div class="form-floating">
 		<input id="PasswordInput" type="password" class="form-control password-inputs" maxlength="20" autocomplete="off">
@@ -55,7 +55,7 @@
 @if (Model.ReenterPassword)
 {
 
-	<div class="col-lg-2 col-md-6 col-sm-12">
+	<div class="@Model.ContainerClasses">
 
 		<div class="form-floating">
 			<input id="ReenterPasswordInput" type="password" class="form-control password-inputs" maxlength="20" autocomplete="off">
@@ -75,13 +75,13 @@
 
 		updateStrengthBar(strength);
 	});
-	
+
 	document.getElementById('ReenterPasswordInput').addEventListener('input', function () {
 
 		hideError('PasswordInput');
 	});
 
-	function isPasswordsValid() {
+	function isPasswordValid() {
 
 		var reenterPasswordActive = "@Model.ReenterPassword";
 

@@ -3,6 +3,7 @@
 	public class PasswordInputDivComponentModel
 	{
 
+		public string ContainerClasses { get; set; }
 		public bool ReenterPassword { get; set; }
 
 	}

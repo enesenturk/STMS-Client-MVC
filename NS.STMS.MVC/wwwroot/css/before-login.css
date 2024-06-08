@@ -45,7 +45,6 @@ input[type=password] {
     font-weight: bold;
     outline: 0;
     padding-left: 0px;
-    margin-bottom: 20px;
     color: #ECF0F5;
 }
 
@@ -143,6 +142,30 @@ label {
         letter-spacing: 2px;
     }
 
+.forgot-password-container {
+    padding-right: 0%;
+}
+
+.forgot-password-link-div {
+    color: white;
+    padding-left: 12px;
+}
+
+    .forgot-password-link-div a {
+        float: left;
+        color: #0DB8DE;
+        letter-spacing: 2px;
+    }
+
 .remember-me-div {
     margin-bottom: 50px;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+.login-input, .password-inputs {
+    height: 60px !important;
+    font-size: 18px !important;
 }
