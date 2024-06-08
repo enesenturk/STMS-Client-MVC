@@ -117,7 +117,7 @@ namespace NS.STMS.MVC.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SetDefaultLanguage(SetLanguageRequestModel request)
+		public JsonResult SetLanguage(SetLanguageRequestModel request)
 		{
 			_loginUserStorage.SetPreferredLanguage(request.Language);
 
@@ -125,7 +125,7 @@ namespace NS.STMS.MVC.Controllers
 			{
 			});
 		}
-
+		
 		#endregion
 
 		#region Login

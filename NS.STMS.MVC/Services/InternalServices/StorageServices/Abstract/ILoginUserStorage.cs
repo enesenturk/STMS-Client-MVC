@@ -16,8 +16,11 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Abstract
 		void SetNeedsChangePassword();
 
 		bool IsLoggedIn();
-		string GetFullName(AccessTokenModel ticket = null);
 		int GetId(AccessTokenModel ticket = null);
+
+		string GetFullName(AccessTokenModel ticket = null);
+		string GetGrade(AccessTokenModel ticket = null);
+		string GetSchoolName(AccessTokenModel ticket = null);
 
 		#endregion
 

@@ -28,4 +28,83 @@
 	options = Model.SupportedLanguages
 	})
 
+	<style>
+		.dropdown .language-selection-btn {
+			border: none !important;
+			background: none !important;
+		}
+
+		.dropdown .language-flag {
+			height: 25px !important;
+			/*border-radius: 50% !important;*/
+			width: auto !important;
+		}
+
+		.dropdown .language-dropdown-ul {
+			background: transparent !important;
+			width: fit-content !important;
+			min-width: fit-content !important;
+			max-width: fit-content !important;
+			padding: 0px !important;
+			border: none !important;
+			inset: 10px auto auto 1px !important;
+			margin-top: 4px;
+		}
+
+			.dropdown .language-dropdown-ul li {
+				background: none !important;
+				width: fit-content !important;
+				cursor: pointer !important;
+				display: inline !important;
+			}
+
+				.dropdown .language-dropdown-ul li a {
+					background: none !important;
+					width: fit-content !important;
+					cursor: pointer !important;
+				}
+	</style>
+
+	<div class="dropdown">
+		<ul class="language-dropdown-ul">
+			<li>
+				<a onclick="setLanguage('en-US')" title="English">
+					<img class="language-flag" src="~/images/languages/usa.jpg" />
+				</a>
+			</li>
+			<li>
+				<a onclick="setLanguage('tr-TR')" title="Türkçe">
+					<img class="language-flag" src="~/images/languages/tr.jpg" />
+				</a>
+			</li>
+		</ul>
+
+	</div>
+
 </div>
+
+<script>
+
+	function setLanguage(language) {
+
+		var data = {
+			Language: language
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "/Account/SetLanguage",
+			data: data,
+			dataType: "json",
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function () {
+
+				location.reload();
+			},
+			error: function (e) {
+				console.log(e);
+			}
+		})
+	}
+
+</script>

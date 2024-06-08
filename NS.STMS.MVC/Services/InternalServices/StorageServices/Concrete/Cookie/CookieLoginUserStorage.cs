@@ -103,6 +103,17 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie
 			return ticket.AcceptedTermsAndConditions && !ticket.NeedsChangePassword;
 		}
 
+		public int GetId(AccessTokenModel ticket = null)
+		{
+			if (ticket is null)
+				ticket = GetAccessToken();
+
+			if (ticket is null)
+				throw new AuthorizationException();
+
+			return ticket.Id;
+		}
+
 		public string GetFullName(AccessTokenModel ticket = null)
 		{
 			if (ticket is null)
@@ -114,7 +125,7 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie
 			return $"{ticket.Name} {ticket.Surname}";
 		}
 
-		public int GetId(AccessTokenModel ticket = null)
+		public string GetGrade(AccessTokenModel ticket = null)
 		{
 			if (ticket is null)
 				ticket = GetAccessToken();
@@ -122,7 +133,18 @@ namespace NS.STMS.MVC.Services.InternalServices.StorageServices.Concrete.Cookie
 			if (ticket is null)
 				throw new AuthorizationException();
 
-			return ticket.Id;
+			return $"{ticket.Student.GradeId}";
+		}
+
+		public string GetSchoolName(AccessTokenModel ticket = null)
+		{
+			if (ticket is null)
+				ticket = GetAccessToken();
+
+			if (ticket is null)
+				throw new AuthorizationException();
+
+			return $"{ticket.Student.SchoolName}";
 		}
 
 		#endregion

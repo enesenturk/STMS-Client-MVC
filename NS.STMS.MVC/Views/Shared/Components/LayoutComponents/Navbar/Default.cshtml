@@ -1,26 +1,71 @@
-﻿
+﻿@model NS.STMS.MVC.Models.ComponentModels.LayoutComponentModels.NavbarComponentModel
+
 <style>
 	.navbar-icons {
 		margin-right: 10px;
 		font-size: 20px;
+	}
+
+	.nav-profile-text .font-weight-medium, .nav-profile-text .font-weight-normal {
+		white-space: normal;
+	}
+
+	.sidebar .nav.sub-menu .nav-item .nav-link:before {
+		display: none;
+	}
+
+	.sidebar .nav.sub-menu .nav-item .nav-link {
+		padding: 0.75rem 1rem 0.75rem 1rem;
 	}
 </style>
 
 
 <ul class="nav">
 
-	<li class="nav-item">
-		<a class="nav-link" href="/Admin/GradeLectures">
-			<i class="mdi mdi-table-large navbar-icons"></i>
-			<span class="menu-title">@Messages.Grade_Lectures</span>
+	<li class="nav-item nav-profile">
+		<a href="#" class="nav-link">
+			<div class="nav-profile-image">
+				<img src="~/images/faces/face1.jpg" />
+				<span class="login-status online"></span>
+			</div>
+			<div class="nav-profile-text d-flex flex-column pr-3">
+				<p class="font-weight-medium mb-1">@Model.NameSurname</p>
+				<p class="font-weight-normal mb-1">@Model.SchoolName</p>
+				<p class="font-weight-normal mb-1">@Messages.Grade: @Model.Grade</p>
+			</div>
 		</a>
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="/Admin/Users">
-			<i class="mdi mdi-account navbar-icons"></i>
-			<span class="menu-title">@Messages.Users</span>
+		<a class="nav-link" href="/Admin/GradeLectures">
+			<i class="mdi mdi-table-large navbar-icons"></i>
+			<span class="menu-title">Hedeflerim</span>
 		</a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link collapsed" data-toggle="collapse" href="#admin" aria-expanded="false" aria-controls="admin">
+			<i class="mdi mdi-key-variant menu-icon"></i>
+			<span class="menu-title">Admin</span>
+			<i class="menu-arrow"></i>
+		</a>
+		<div class="collapse" id="admin" style="">
+			<ul class="nav flex-column sub-menu">
+				<li class="nav-item">
+					<a class="nav-link" href="/Admin/GradeLectures">
+						<i class="mdi mdi-table-large navbar-icons"></i>
+						<span class="menu-title">@Messages.Grade_Lectures</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="/Admin/Users">
+						<i class="mdi mdi-account navbar-icons"></i>
+						<span class="menu-title">@Messages.Users</span>
+					</a>
+				</li>
+			</ul>
+		</div>
 	</li>
 
 </ul>

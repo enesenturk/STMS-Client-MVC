@@ -88,7 +88,7 @@ namespace NS.STMS.MVC.Filters
 				(controllerName == "Account" && actionName == "Login") ||
 				(controllerName == "Account" && actionName == "LogOut") ||
 				(controllerName == "Account" && actionName == "ResetPassword") ||
-				(controllerName == "Account" && actionName == "SetDefaultLanguage") ||
+				(controllerName == "Account" && actionName == "SetLanguage") ||
 				(controllerName == "Account" && actionName == "TermsAndConditions");
 		}
 
